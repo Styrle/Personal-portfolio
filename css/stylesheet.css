@@ -18,6 +18,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -28,6 +29,7 @@ body {
 }
 ol, ul {
 	list-style: none;
+	text-decoration: none;
 }
 blockquote, q {
 	quotes: none;
@@ -40,4 +42,80 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+/* Write your own styles below */
+
+
+/* Here we are creating our menu */
+.navigation{
+	border:0px;
+   margin: 0px;
+   padding: 0px;
+   overflow: hidden;
+   background-color: #1ECECE;
+	 position: relative ;
+	 padding: 2vh;
+
+}
+
+
+
+li {
+  display: block;
+	float: left;
+
+}
+
+li a {
+  display: block;
+  color: #4F4F4F;
+  text-align: center;
+  text-decoration: none;
+	padding-left: 2vh;
+	padding-right: 2vh;
+
+}
+
+li a:hover {
+  color: #ffffff;
+}
+/* In this section we will sort our home page styles */
+
+/* Header */
+.header-home {
+	padding: 20em;
+ 	background: #F1F1F1;
+
+}
+
+.home-h1 {
+	text-align:left;
+}
+/* In this section we will sort our about page styles */
+/* Header */
+.header-about {
+ 	text-align: left;
+ 	background: #F1F1F1;
+	font-size: 30px;
+}
+
+
+/* In this section we will sort our work page styles */
+/* Header */
+.header-work {
+	padding: 20vh;
+ 	text-align: left;
+ 	background: #F1F1F1;
+	font-size: 30px;
+}
+
+
+
+/* In this section we will sort our contact page styles */
+/* Header */
+.header-contact {
+	padding: 20vh;
+ 	text-align: left;
+ 	background: #F1F1F1;
+	font-size: 30px;
 }
