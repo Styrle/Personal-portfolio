@@ -52,7 +52,7 @@ table {
    margin: 0px;
    padding: 0px;
    overflow: hidden;
-   background-color: #1ECECE;
+   background-color: #353b48;
 	 position: relative ;
 	 padding: 2vh;
 	 font-family: DINPro;
@@ -67,7 +67,7 @@ li {
 
 li a {
   display: block;
-  color: #4F4F4F;
+  color: #FFFFFF;
   text-align: center;
   text-decoration: none;
 	padding-left: 2vh;
@@ -77,21 +77,25 @@ li a {
 
 a {
 	  text-decoration: none;
-
 }
 
 li a:hover {
   color: #ffffff;
+	text-decoration:none;
+}
+
+p a:hover {
+  color: #ffffff;
+	text-decoration:none;
 }
 /* In this section we will sort our home page styles */
 
 /* Header */
 .header-home {
-	height: 600px;
+	height: 750px;
 	text-align: left;
-	background: #F1F1F1;
+	background: #487eb0;
 	font-size: 42px;
-	text-decoration: none;
 	color: #383838;
 	padding-left: 60px;
 	font-family: DINPro;
@@ -110,6 +114,7 @@ li a:hover {
 
 #experience {
 	height: 500px;
+	padding: 10px;
 	text-align: center;
 	font-size: 42px;
 	color: #383838;
