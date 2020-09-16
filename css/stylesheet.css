@@ -76,6 +76,7 @@ li a {
 }
 
 a {
+  	color: #ffffff;
 	  text-decoration: none;
 }
 
@@ -90,7 +91,7 @@ p a:hover {
 }
 /* In this section we will sort our home page styles */
 
-/* Header */
+/* Home header */
 .header-home {
 	height: 750px;
 	text-align: left;
@@ -98,13 +99,13 @@ p a:hover {
 	font-size: 42px;
 	color: #383838;
 	padding-left: 60px;
-	font-family: DINPro;
 	font-weight: 400;
 }
 
 .intro{
 	padding-top: 50px;
-	letter-spacing: 3px;
+	letter-spacing: 2px;
+	text-align: center;
 }
 .info {
 	padding-top:200px;
@@ -119,32 +120,35 @@ p a:hover {
 	text-align: center;
 	font-size: 42px;
 	color: #383838;
-	font-family: DINPro;
 	font-weight: bold;
 }
-/* In this section we will sort our about page styles */
-/* Header */
+
+/* About page style */
 .header-about {
 	height: 300px;
- 	text-align: left;
+ 	text-align: center;
  	background: #F1F1F1;
 }
 
 
-/* In this section we will sort our work page styles */
-/* Header */
+/* Work page style */
 .header-work {
 	height: 300px;
- 	text-align: left;
  	background: #F1F1F1;
 }
 
+.work {
+	text-align: center;
+}
 
-
-/* In this section we will sort our contact page styles */
-/* Header */
+/* Contact page style */
 .header-contact {
 	height: 300px;
  	text-align: left;
  	background: #F1F1F1;
+}
+
+.contact {
+	text-align: center;
+
 }
