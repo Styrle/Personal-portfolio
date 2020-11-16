@@ -43,10 +43,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/* Write your own styles below */
 
 
-/* Here we are creating our menu */
+/* Global elements */
+
+/* Menu */
 .navigation{
 	border:0px;
    margin: 0px;
@@ -62,7 +63,6 @@ table {
 li {
   display: block;
 	float: left;
-
 }
 
 li a {
@@ -89,9 +89,50 @@ p a:hover {
   color: #ffffff;
 	text-decoration:none;
 }
-/* In this section we will sort our home page styles */
 
-/* Home header */
+/* Footer */
+footer {
+	background-color:#1F4652 ;
+	width:100%;
+	color: white;
+}
+
+.footer-row {
+	display: flex;
+	padding:10px;
+}
+
+.footer-column {
+	float: left;
+}
+
+.footer-left {
+	padding: 20px;
+}
+
+.nav-footer {
+	margin: 5px 0px 5px 0px;
+}
+
+.footer-right {
+	 display: block;
+	 margin-left: auto;
+	 width: 30%;
+	 position: relative;
+	 padding: 20px;
+}
+
+.social-images img {
+	margin-right: 10px;
+
+}
+
+.footer-bottom {
+	text-align: center;
+}
+
+/* Home */
+
 .header-home {
 	height: 750px;
 	text-align: left;
@@ -123,15 +164,14 @@ p a:hover {
 	font-weight: bold;
 }
 
-/* About page style */
+/* About */
 .header-about {
 	height: 300px;
  	text-align: center;
  	background: #F1F1F1;
 }
 
-
-/* Work page style */
+/* Work */
 .header-work {
 	height: 300px;
  	background: #F1F1F1;
@@ -141,12 +181,13 @@ p a:hover {
 	text-align: center;
 }
 
-/* Contact page style */
+/* Contact */
 .header-contact {
 	height: 300px;
  	text-align: left;
  	background: #F1F1F1;
 }
+
 
 .contact {
 	text-align: center;
