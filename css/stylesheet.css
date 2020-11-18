@@ -18,7 +18,6 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -29,7 +28,7 @@ body {
 }
 ol, ul {
 	list-style: none;
-	text-decoration: none;
+	margin-bottom: 0 !important;
 }
 blockquote, q {
 	quotes: none;
@@ -49,29 +48,23 @@ table {
 
 /* Menu */
 nav{
+   width: 100%;
 	 border:0px;
-   margin: 0px;
-   padding: 0px;
-   overflow: hidden;
+	 padding: 5px;
    background-color: #353b48;
 	 position: relative ;
-	 padding: 1vh;
 	 font-weight: 400;
-	 text-align: left;
+	 text-align: right;
 }
 
 nav ul li {
 	display: inline-block;
-	float: right;
-	position:relative;
-
 }
 
 nav ul li a {
   display: block;
   text-decoration: none;
   color: #aaa;
-  font-weight: 200;
   margin: 0 5px;
 	position:relative;
   z-index: 1;
@@ -87,8 +80,6 @@ li a:hover {
   color: #ffffff;
 	text-decoration:none;
 }
-
-
 
 /* Footer */
 footer {
@@ -134,21 +125,19 @@ footer {
 /* Home */
 
 .header-home {
-	height: 750px;
-	text-align: left;
+	height: 80vh;
 	background: #487eb0;
 	color: #383838;
-	padding-left: 60px;
 	font-weight: 400;
+	text align:center;
 }
 
 .intro{
-	padding-top: 50px;
 	letter-spacing: 2px;
 	text-align: center;
+	padding:25% 10% 10% 10%;
 }
 .info {
-	padding-top:200px;
 	font-size:18px ;
 	color:black ;
 	text-decoration: none;
