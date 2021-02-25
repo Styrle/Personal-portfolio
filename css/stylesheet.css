@@ -49,6 +49,7 @@ table {
 /* Menu */
 nav{
    width: 100%;
+	 position: fixed;
 	 border:0px;
 	 padding: 5px;
    background-color: #353b48;
@@ -83,7 +84,7 @@ li a:hover {
 
 /* Footer */
 footer {
-	background-color:#1F4652 ;
+	background-color:#353b48 ;
 	width:100%;
 	color: white;
 }
@@ -126,8 +127,8 @@ footer {
 
 .header-home {
 	height: 80vh;
-	background: #487eb0;
-	color: #383838;
+	background: #353b48;
+	color: #FFFFFF;
 	font-weight: 400;
 	text align:center;
 }
@@ -135,7 +136,7 @@ footer {
 .intro{
 	letter-spacing: 2px;
 	text-align: center;
-	padding:25% 10% 10% 10%;
+	padding:20% 10% 10% 10%;
 }
 .info {
 	font-size:18px ;
@@ -173,7 +174,8 @@ footer {
 .header-contact {
 	height: 300px;
  	text-align: left;
- 	background: #F1F1F1;
+ 	background: #353b48;
+	color:#ffffff;
 }
 
 
