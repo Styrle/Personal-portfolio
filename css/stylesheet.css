@@ -8,7 +8,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, hero, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -20,7 +20,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, hero, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -154,14 +154,14 @@ footer {
 }
 
 /* About */
-.header-about {
+.hero-about {
 	height: 300px;
  	text-align: center;
  	background: #F1F1F1;
 }
 
 /* Work */
-.header-work {
+.hero-work {
 	height: 300px;
  	background: #F1F1F1;
 }
@@ -171,7 +171,7 @@ footer {
 }
 
 /* Contact */
-.header-contact {
+.hero-contact {
 	height: 300px;
  	text-align: left;
  	background: #353b48;
