@@ -51,8 +51,7 @@ nav{
    width: 100%;
 	 position: fixed;
 	 border:0px;
-	 padding: 5px;
-   background-color: #353b48;
+	 background-color: #1ECECE;
 	 position: relative ;
 	 font-weight: 400;
 	 text-align: right;
@@ -60,12 +59,13 @@ nav{
 
 nav ul li {
 	display: inline-block;
+	padding: 10px
 }
 
 nav ul li a {
   display: block;
   text-decoration: none;
-  color: #aaa;
+  color: #000000;
   margin: 0 5px;
 	position:relative;
   z-index: 1;
@@ -73,13 +73,21 @@ nav ul li a {
 }
 
 a {
-  color: #ffffff;
+  color: #4F4F4F;
 	 text-decoration: none;
 }
 
 li a:hover {
   color: #ffffff;
 	text-decoration:none;
+}
+
+h3 {
+	font-size: 36px;
+}
+
+h4 {
+	font-size: 24px;
 }
 
 /* Footer */
@@ -134,10 +142,27 @@ footer {
 }
 
 .intro{
+	display: flex;
+	flex-direction: column;
 	letter-spacing: 2px;
-	text-align: center;
-	padding:20% 10% 10% 10%;
+	padding:5% 10% 10% 10%;
 }
+
+.intro-name {
+	order: 1;
+
+}
+
+
+.intro-current {
+	order:2;
+
+}
+
+.uk {
+	order:3;
+}
+
 .info {
 	font-size:18px ;
 	color:black ;
@@ -151,6 +176,16 @@ footer {
 	font-size: 42px;
 	color: #383838;
 	font-weight: bold;
+}
+
+.work-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.work-row {
+	background-color: #ffffff;
 }
 
 /* About */
