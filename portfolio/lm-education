@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../css/stylesheet.css" type="text/css">
   </head>
   <body>
-    <div>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -15,9 +14,10 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-    </div>
-    <header>
-    </header>
+      <main>
+        <header>
+        </header>
+      </main>
     <footer>
       <div class="footer-row">
         <div class="footer-left footer-column">
