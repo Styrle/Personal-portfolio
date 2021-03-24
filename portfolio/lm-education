@@ -17,6 +17,21 @@
       <main>
         <header>
         </header>
+        <div class="measuring-success">
+          <h3>Measuring Success</h3>
+          <div class="success-stats-1">
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="success-stats-2">
+            <h3></h3>
+            <p></p>
+          </div>
+          <div class="success-stats-3">
+            <h3></h3>
+            <p></p>
+          </div>
+        </div>
       </main>
     <footer>
       <div class="footer-row">
