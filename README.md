@@ -2,7 +2,7 @@ Portfolio
 =========
 
 ## Description
-This is a portfolio of my work whilst being a web developer
+This is a portfolio of my work displaying my web development and UX projects
 
 ## Internet of things
 
