@@ -44,14 +44,20 @@ table {
 }
 
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
 /* Global elements */
 
 /* Menu */
+body {
+	font-family: 'Inter';
+}
+
 nav{
    width: 100%;
 	 position: fixed;
 	 border:0px;
-	 background-color: #1ECECE;
+	 background-color: #ffffff;
 	 position: relative ;
 	 font-weight: 400;
 	 text-align: right;
@@ -78,8 +84,12 @@ a {
 }
 
 li a:hover {
-  color: #ffffff;
+  color: #353b48;
 	text-decoration:none;
+}
+
+h1 {
+	font-size: 64px;
 }
 
 h3 {
@@ -92,48 +102,53 @@ h4 {
 
 /* Footer */
 footer {
-	background-color:#353b48 ;
+	background-color: #353b48;
 	width:100%;
+	color: white;
+	padding: 10px;
+}
+
+.footer-flex {
+	display: flex;
+}
+
+.footer-email {
 	color: white;
 }
 
-.footer-row {
-	display: flex;
-	padding:10px;
+.footer-email:hover {
+	color: white;
+	text-decoration: none;
 }
 
-.footer-column {
-	float: left;
-}
-
-.footer-left {
-	padding: 20px;
-}
-
-.nav-footer {
+.nav-footer a {
 	margin: 5px 0px 5px 0px;
+	color: white; !important
 }
 
-.footer-right {
-	 display: block;
-	 margin-left: auto;
-	 width: 30%;
-	 position: relative;
-	 padding: 20px;
+.nav-footer li {
+	display: inline-block;
+	padding-right: 10px;
 }
+
 
 .social-images img {
 	margin-right: 10px;
 
 }
 
-.footer-bottom {
-	text-align: center;
+.follow {
+	text-transform: uppercase !important;
+}
+
+.row {
+	padding: 10px;
 }
 
 /* Home */
 
 .hero-home {
+	position: relative;
 	height: 80vh;
 	background: #353b48;
 	color: #FFFFFF;
@@ -142,32 +157,13 @@ footer {
 }
 
 .intro{
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	letter-spacing: 2px;
 	padding:5% 10% 10% 10%;
 }
 
-.intro-name {
-	order: 1;
-
-}
-
-
-.intro-current {
-	order:2;
-
-}
-
-.uk {
-	order:3;
-}
-
-.info {
-	font-size:18px ;
-	color:black ;
-	text-decoration: none;
-}
 
 #experience {
 	height: 500px;

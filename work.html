@@ -2,9 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="description" content="See our past and present work to see how we can help you.">
-    <title>Joshua's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Joshua's Portfolio | Work Page</title>
     <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
   </head>
   <body>
     <div>
@@ -17,47 +20,64 @@
         </ul>
       </nav>
     </div>
-    <main>
-      <header class="hero-work">
-        <div class="work">
-          <h1>My Work</h1>
-        </div>
-      </header>
-      <h2>Filter DIV Elements</h2>
-
-      <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-        <button class="btn" onclick="filterSelection('website')"> Website's</button>
-        <button class="btn" onclick="filterSelection('UX/UI')"> UX/UI</button>
-        <button class="btn" onclick="filterSelection('branding')"> Branding</button>
-        <button class="btn" onclick="filterSelection('colors')"> Colors</button>
-      </div>
-
+    <main id="work">
+      <h2>View My Work</h2>
       <div class="container">
-        <div class="filterDiv website">BMW</div>
-        <div class="filterDiv colors fruits">Orange</div>
-        <div class="filterDiv cars">Volvo</div>
-        <div class="filterDiv colors">Red</div>
-        <div class="filterDiv cars animals">Mustang</div>
-        <div class="filterDiv colors">Blue</div>
-        <div class="filterDiv animals">Cat</div>
-        <div class="filterDiv animals">Dog</div>
-        <div class="filterDiv fruits">Melon</div>
-        <div class="filterDiv fruits animals">Kiwi</div>
-        <div class="filterDiv fruits">Banana</div>
-        <div class="filterDiv fruits">Lemon</div>
-        <div class="filterDiv animals">Cow</div>
+        <div class="row">
+          <div class="col">
+            <img src="./images/preactiv-logo.png" alt="">
+          </div>
+          <div class="col">
+            <h3>Preactiv</h3>
+            <p>This was truly a great project to work on. I had the pleasure of working with Bath NHS trust, designing an app which would help those get fit before their operation.</p>
+            <p>UX/UI Designer | Joshua Serpis</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            1 of 3
+          </div>
+          <div class="col">
+            2 of 3
+          </div>
+          <div class="col">
+            3 of 3
+          </div>
+        </div>
       </div>
-    </main>
 
+
+    </main>
     <footer>
-      <div class="footer-column">
-        <h3>SOCIALS<h3>
-        <div class="social-images">
-          <img src="images/twitter.png" alt="Twitter" width="30" height="30">
-          <img src="images/github.png" alt="Github" width="30" height="30">
-          <img src="images/codepen.png" alt="Codepen" width="30" height="30">
-          <img src="images/spotify.png" alt="Spotify" width="30" height="30">
+        <div class="container">
+         <div class="row">
+           <div class="col-9">
+                 <ul class="nav-footer">
+                   <li><a href="index.html" class="active">Home</a></li>
+                   <li><a href="about.html">About</a></li>
+                   <li><a href="work.html">Work</a></li>
+                   <li><a href="contact.html">Contact</a></li>
+                 </ul>
+           </div>
+           <div class="col-3">
+               <p class="follow">Follow Me</p>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-9">
+               <a class="footer-email align-middle" href="mailto:joshserpis@gmail.com">Email: joshserpis@gmail.com</a>
+           </div>
+           <div class="col-3 social-images">
+               <img src="images/twitter.png" alt="Twitter" width="20" height="20">
+               <img src="images/github.png" alt="Github" width="20" height="20">
+               <img src="images/codepen.png" alt="Codepen" width="20" height="20">
+           </div>
+         </div>
+       </div>
+      <hr class="footer-divider">
+      <div class="row">
+        <div class="col ">
+            <p>© 2020 Serpex Studios</p>
         </div>
       </div>
     </footer>
