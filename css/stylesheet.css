@@ -91,6 +91,9 @@ li a:hover {
 h1 {
 	font-size: 64px;
 }
+h2 {
+	font-size: 48px;
+}
 
 h3 {
 	font-size: 36px;
@@ -149,29 +152,40 @@ footer {
 
 .hero-home {
 	position: relative;
-	height: 80vh;
+	height: 50vh;
 	background: #353b48;
 	color: #FFFFFF;
 	font-weight: 400;
-	text align:center;
+	font-weight: bold;
 }
 
 .intro{
 	position: absolute;
-	display: flex;
-	flex-direction: column;
 	letter-spacing: 2px;
-	padding:5% 10% 10% 10%;
+	padding:5% 5% 10% 10%;
+	vertical-align: middle;
+}
+
+.hero-content {
+	padding-bottom: 30px;
+}
+
+.cta {
+	text-align: center;
+}
+
+.cta a {
+	color: white;
+	font-size: 12px;
+	text-transform: uppercase;
+	border: 2px solid #ffffff;
+	padding: 10px;
 }
 
 
-#experience {
-	height: 500px;
-	padding: 10px;
-	text-align: center;
-	font-size: 42px;
-	color: #383838;
-	font-weight: bold;
+.cta a:hover {
+	text-decoration: none;
+	background-color: #474F61;
 }
 
 .work-row {
@@ -192,14 +206,50 @@ footer {
 }
 
 /* Work */
-.hero-work {
-	height: 300px;
- 	background: #F1F1F1;
+#work {
+	padding:150px;
 }
 
-.work {
-	text-align: center;
+#work p {
+	font-size: 13px;
+
 }
+
+@media only screen and (min-width: 770px) {
+  #work {
+	padding:0px;
+  }
+}
+
+.preactiv {
+	align-self: center;
+	line-height:normal;
+	margin-left: 50px;
+}
+
+.one-guys {
+	align-self: center;
+	line-height:normal;
+	margin-right: 50px;
+}
+
+
+@media only screen and (max-width: 770px){
+	.one-guys-img {
+	 order: 0;
+   }
+	.one-guys {
+	 order: 1;
+	 margin-right: 0px;
+	}
+}
+
+.fibre {
+	align-self: center;
+	line-height:normal;
+	margin-left: 50px;
+}
+
 
 /* Contact */
 .hero-contact {
@@ -241,3 +291,4 @@ footer {
   background-color: #666;
   color: white;
 }
+
