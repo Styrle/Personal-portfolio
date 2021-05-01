@@ -73,19 +73,21 @@ nav ul li a {
   text-decoration: none;
   color: #000000;
   margin: 0 5px;
-	position:relative;
+  position:relative;
   z-index: 1;
-	padding: 10px;
+  padding: 10px;
 }
 
 a {
   color: #4F4F4F;
-	 text-decoration: none;
+  text-decoration: none;
+  transition: 0.3s ease all;
+
 }
 
 li a:hover {
   color: #353b48;
-	text-decoration:none;
+  text-decoration:none;
 }
 
 h1 {
@@ -160,9 +162,7 @@ footer {
 }
 
 .intro{
-	position: absolute;
 	letter-spacing: 2px;
-	padding:5% 5% 10% 10%;
 	vertical-align: middle;
 }
 
@@ -171,7 +171,7 @@ footer {
 }
 
 .cta {
-	text-align: center;
+	text-align:center;
 }
 
 .cta a {
@@ -180,29 +180,50 @@ footer {
 	text-transform: uppercase;
 	border: 2px solid #ffffff;
 	padding: 10px;
+	background-image: -webkit-linear-gradient(45deg, #ffffff 50%, transparent 50%);
+	background-image: linear-gradient(45deg, #ffffff 50%, transparent 50%);
+	background-position: 100%;
+	background-size: 400%;
+	-webkit-transition: background 300ms ease-in-out;
+	transition: background 300ms ease-in-out;
 }
 
 
 .cta a:hover {
+	background-position: 0;
+	color: black;
 	text-decoration: none;
-	background-color: #474F61;
+
 }
 
-.work-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+
+.mini-box {
+	height: 30vh;
+	background-color: #353b48;
+	margin: 10px;
+	color: white;
+	text-align: center;
 }
 
-.work-row {
-	background-color: #ffffff;
+.mini-box p {
+	vertical-align: middle;
+
 }
+
+.working-with h4 {
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.
 
 /* About */
 .hero-about {
 	height: 300px;
  	text-align: center;
  	background: #F1F1F1;
+	padding: 10px;
 }
 
 /* Work */
@@ -252,22 +273,7 @@ footer {
 
 
 /* Contact */
-.hero-contact {
-	height: 300px;
- 	text-align: left;
- 	background: #353b48;
-	color:#ffffff;
-}
 
-
-.contact {
-	text-align: center;
-
-}
-
-.show {
-  display: block;
-}
 
 .container {
   margin-top: 20px;
@@ -291,4 +297,3 @@ footer {
   background-color: #666;
   color: white;
 }
-
