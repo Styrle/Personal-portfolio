@@ -92,7 +92,9 @@ li a:hover {
 
 h1 {
 	font-size: 64px;
+	font-family: 'IBM Plex Mono', monospace;
 }
+
 h2 {
 	font-size: 48px;
 }
@@ -103,6 +105,220 @@ h3 {
 
 h4 {
 	font-size: 24px;
+}
+
+
+.row {
+	padding: 10px;
+}
+
+/* Home */
+
+.hero-home {
+	position: relative;
+	height: 55vh;
+	background: #353b48;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+@media (max-width: 770px) {
+.hero-home {
+	height: 55vh;
+ }
+}
+
+@media (max-width: 325px) {
+.hero-home {
+	height: 62vh;
+ }
+}
+
+@media (max-width: 770px) {
+.hero-home h1 {
+    font-size: 2.225rem;
+  }
+}
+
+.intro{
+	letter-spacing: 2px;
+	vertical-align: middle;
+}
+
+.hero-content {
+	padding-bottom: 30px;
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+.cta {
+	text-align:center;
+}
+
+.cta a {
+	color: white;
+	font-size: 12px;
+	text-transform: uppercase;
+	border: 2px solid #ffffff;
+	padding: 10px;
+	background-image: -webkit-linear-gradient(45deg, #ffffff 50%, transparent 50%);
+	background-image: linear-gradient(45deg, #ffffff 50%, transparent 50%);
+	background-position: 100%;
+	background-size: 400%;
+	-webkit-transition: background 300ms ease-in-out;
+	transition: background 300ms ease-in-out;
+}
+
+
+.cta a:hover {
+	background-position: 0;
+	color: black;
+	text-decoration: none;
+
+}
+
+
+.mini-box {
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+	height: 30vh;
+	background-color: #353b48;
+	margin: 10px;
+	color: white;
+}
+
+@media (max-width: 770px) {
+.mini-box {
+	margin: 50px 50px 0 50px;
+	height: 50vh;
+
+ }
+}
+
+.mini-box p {
+	vertical-align: middle;
+	align-items: center;
+	align-items: flex-start;
+	padding-top: 10px;
+
+
+}
+
+.mini-box img {
+	align-items: flex-start;
+	height: 10%;
+	align-self: start;
+
+}
+
+.mini-box a {
+	color: white;
+	padding-top: 20px;
+
+}
+
+.mini-box a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.working-with h4 {
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+/* About */
+.hero-about {
+	height: 300px;
+ 	text-align: center;
+ 	background: #F1F1F1;
+	padding: 10px;
+}
+
+/* Work */
+#work {
+	padding:150px;
+}
+
+#work h2 {
+	font-family: 'IBM Plex Mono', monospace;
+}
+
+#work p {
+	font-size: 13px;
+}
+
+.my-work {
+	text-align: center;
+	padding: 200px;
+}
+
+@media only screen and (min-width: 770px) {
+  #work {
+	padding:0px;
+  }
+}
+
+.preactiv {
+	align-self: center;
+	line-height:normal;
+	margin-left: 50px;
+}
+
+.one-guys {
+	align-self: center;
+	line-height:normal;
+	margin-right: 50px;
+}
+
+
+@media only screen and (max-width: 770px){
+	.one-guys-img {
+	 order: 0;
+   }
+	.one-guys {
+	 order: 1;
+	 margin-right: 0px;
+	}
+}
+
+.fibre {
+	align-self: center;
+	line-height:normal;
+	margin-left: 50px;
+}
+
+.lm {
+	align-self: center;
+	line-height:normal;
+}
+
+
+/* Contact */
+
+
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
 }
 
 /* Footer */
@@ -144,156 +360,4 @@ footer {
 
 .follow {
 	text-transform: uppercase !important;
-}
-
-.row {
-	padding: 10px;
-}
-
-/* Home */
-
-.hero-home {
-	position: relative;
-	height: 50vh;
-	background: #353b48;
-	color: #FFFFFF;
-	font-weight: 400;
-	font-weight: bold;
-}
-
-.intro{
-	letter-spacing: 2px;
-	vertical-align: middle;
-}
-
-.hero-content {
-	padding-bottom: 30px;
-}
-
-.cta {
-	text-align:center;
-}
-
-.cta a {
-	color: white;
-	font-size: 12px;
-	text-transform: uppercase;
-	border: 2px solid #ffffff;
-	padding: 10px;
-	background-image: -webkit-linear-gradient(45deg, #ffffff 50%, transparent 50%);
-	background-image: linear-gradient(45deg, #ffffff 50%, transparent 50%);
-	background-position: 100%;
-	background-size: 400%;
-	-webkit-transition: background 300ms ease-in-out;
-	transition: background 300ms ease-in-out;
-}
-
-
-.cta a:hover {
-	background-position: 0;
-	color: black;
-	text-decoration: none;
-
-}
-
-
-.mini-box {
-	height: 30vh;
-	background-color: #353b48;
-	margin: 10px;
-	color: white;
-	text-align: center;
-}
-
-.mini-box p {
-	vertical-align: middle;
-
-}
-
-.working-with h4 {
-	font-weight: bold;
-	text-align: center;
-	padding-bottom: 30px;
-}
-
-.
-
-/* About */
-.hero-about {
-	height: 300px;
- 	text-align: center;
- 	background: #F1F1F1;
-	padding: 10px;
-}
-
-/* Work */
-#work {
-	padding:150px;
-}
-
-#work p {
-	font-size: 13px;
-
-}
-
-@media only screen and (min-width: 770px) {
-  #work {
-	padding:0px;
-  }
-}
-
-.preactiv {
-	align-self: center;
-	line-height:normal;
-	margin-left: 50px;
-}
-
-.one-guys {
-	align-self: center;
-	line-height:normal;
-	margin-right: 50px;
-}
-
-
-@media only screen and (max-width: 770px){
-	.one-guys-img {
-	 order: 0;
-   }
-	.one-guys {
-	 order: 1;
-	 margin-right: 0px;
-	}
-}
-
-.fibre {
-	align-self: center;
-	line-height:normal;
-	margin-left: 50px;
-}
-
-
-/* Contact */
-
-
-.container {
-  margin-top: 20px;
-  overflow: hidden;
-}
-
-/* Style the buttons */
-.btn {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #ddd;
-}
-
-.btn.active {
-  background-color: #666;
-  color: white;
 }
