@@ -185,6 +185,8 @@ h4 {
 	background-color: #353b48;
 	margin: 10px;
 	color: white;
+	line-height: normal;
+
 }
 
 @media (max-width: 770px) {
@@ -200,6 +202,8 @@ h4 {
 	align-items: center;
 	align-items: flex-start;
 	padding-top: 10px;
+	padding-bottom: 40px;
+	font-weight: bold;
 
 
 }
@@ -247,6 +251,11 @@ h4 {
 
 #work p {
 	font-size: 13px;
+	padding: 5px 0 5px 0;
+}
+
+.work-row {
+	padding:50px;
 }
 
 .my-work {
@@ -266,10 +275,21 @@ h4 {
 	margin-left: 50px;
 }
 
+.preactiv-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .one-guys {
 	align-self: center;
 	line-height:normal;
-	margin-right: 50px;
+}
+
+.one-guys-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
@@ -289,9 +309,21 @@ h4 {
 	margin-left: 50px;
 }
 
+.fibre-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .lm {
 	align-self: center;
 	line-height:normal;
+}
+
+.lm-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
