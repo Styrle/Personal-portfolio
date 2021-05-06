@@ -317,6 +317,19 @@ h4 {
   }
 }
 
+.project-description {
+	line-height: normal;
+	padding: 15% 0;
+}
+
+.project-description p {
+	padding-bottom: 10px;
+}
+
+.content {
+	align-self: center;
+}
+
 .preactiv {
 	align-self: center;
 	line-height:normal;
