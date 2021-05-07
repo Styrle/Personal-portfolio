@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Joshua Serpis Web & UX Development">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <title>Joshua's Portfolio | One Guys Work</title>
+    <title>Joshua's Portfolio | Preactiv Work</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/stylesheet.css" type="text/css">
@@ -26,7 +26,7 @@
      <section>
          <div class="container">
              <div class="row project-description">
-               <div class="col">
+               <div class="col-md">
                    <h2>Preactiv</h2>
                    <h4>Project type</h4>
                    <p>UX/UI Design</p>
@@ -39,7 +39,7 @@
                    <p>Video Editing</p>
                    <p>Illustration</p>
                </div>
-               <div class="col content">
+               <div class="col-md content">
                    <p>Preactiv is a application used by the NHS to help those get fit before surgery. My primary role was to work as a UX designer to push the applications visual design whilst keeping it accessible to the older audiance. The primary goal was to create an application in which users would be guided through a series of exercises every day, this being determined by an algorithm.</p>
                    <p>The project ran over 7 months working on the UX/UI process and later on, creating videos for patients and the landing pages for the website to promote the application.</p>
                    <p>I worked closely with team leaders and the development team to ensure all concepts where handled appropriately, this included handing over stylesheets, designs accross multiple breakpoints, clickable prototypes and interactions.</p>
@@ -53,16 +53,21 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img class="d-block w-100" src="../images/preactiv-img-1.png" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="../images/fibre-img-1.png" alt="Second slide">
+              <img class="d-block w-100" src="../images/preactiv-img-2.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100" src="..." alt="Third slide">
+              <img class="d-block w-100" src="../images/preactiv-img-3.png" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="../images/preactiv-img-4.png" alt="Fourth slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -107,10 +112,6 @@
             <p>© 2020 Serpex Studios</p>
         </div>
     </footer>
-    <script type="text/javascript">
-    $('.carousel').carousel({
-    interval: 2000
-    })
-    </script>
+    <script src="../js/carouselPrompts.js"></script>
   </body>
 </html>
