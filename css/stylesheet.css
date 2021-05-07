@@ -181,9 +181,14 @@ h4 {
 	text-decoration: none;
 }
 
+.big-box h3 {
+	display: table-caption;
+}
+
 @media (max-width: 770px) {
 .big-box {
 	text-align: center;
+	display: inline-grid;
  }
 }
 
@@ -311,9 +316,12 @@ h4 {
 	justify-content: center;
 }
 
-@media only screen and (min-width: 770px) {
+@media only screen and (max-width: 770px) {
   #work {
 	padding:0px;
+  }
+  .my-work {
+	padding: 200px 0 0 0;
   }
 }
 
@@ -323,7 +331,7 @@ h4 {
 }
 
 .project-description p {
-	padding-bottom: 10px;
+	padding: 10px 0 5px 0;
 }
 
 .content {
@@ -342,6 +350,17 @@ h4 {
 	line-height:normal;
 }
 
+.fibre {
+	align-self: center;
+	line-height:normal;
+	margin-left: 50px;
+}
+
+.lm {
+	align-self: center;
+	line-height:normal;
+}
+
 
 @media only screen and (max-width: 770px){
 	.one-guys-img {
@@ -351,19 +370,22 @@ h4 {
 	 order: 1;
 	 margin-right: 0px;
 	}
+	.preactiv {
+		margin: 0;
+	}
+	.fibre {
+		margin: 0;
+	}
+	.lm {
+		order: 1;
+	}
+	.lm-img {
+		order: 0;
+	}
+}
 }
 
-.fibre {
-	align-self: center;
-	line-height:normal;
-	margin-left: 50px;
-}
 
-
-.lm {
-	align-self: center;
-	line-height:normal;
-}
 
 
 
