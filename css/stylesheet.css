@@ -132,18 +132,15 @@ h4 {
 .hero-home {
 	height: 55vh;
  }
+ .hero-home h1 {
+     font-size: 2.225rem;
+   }
 }
 
 @media (max-width: 325px) {
 .hero-home {
 	height: 62vh;
  }
-}
-
-@media (max-width: 770px) {
-.hero-home h1 {
-    font-size: 2.225rem;
-  }
 }
 
 .intro{
@@ -260,20 +257,24 @@ h4 {
 	padding: 150px;
 }
 
+@media (max-width: 770px) {
+.about-hero-content {
+	padding: 80px 0 80px 0;
+ }
+ .about-img {
+	width: 100%;
+ 	height: auto;
+ }
+}
+
 .about-content {
 	align-self: center;
 	line-height:normal;
 }
 
-
-
 /* Work */
 #work {
 	padding:150px;
-}
-
-#work h2 {
-	font-family: 'IBM Plex Mono', monospace;
 }
 
 #work p {
