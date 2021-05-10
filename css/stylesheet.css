@@ -387,9 +387,6 @@ h4 {
 }
 
 
-
-
-
 .container {
   margin-top: 20px;
   overflow: hidden;
@@ -435,4 +432,17 @@ footer {
 
 .follow {
 	text-transform: uppercase !important;
+}
+
+@media only screen and (max-width: 770px){
+	.footer-email {
+		order: 1;
+	}
+	.social-images {
+		order: 0;
+		padding-bottom: 20px;
+	}
+	.follow {
+		padding-top: 20px;
+	}
 }
