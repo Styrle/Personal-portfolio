@@ -336,6 +336,10 @@ h4 {
 	padding: 10px 0 5px 0;
 }
 
+.project-description h4 {
+	padding: 20px 0 0 0;
+}
+
 .content {
 	align-self: center;
 }
@@ -416,6 +420,11 @@ footer {
 }
 
 .nav-footer a {
+	margin: 5px 0px 5px 0px;
+	color: white; !important
+}
+
+.nav-footer a:hover {
 	margin: 5px 0px 5px 0px;
 	color: white; !important
 }
