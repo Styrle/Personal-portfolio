@@ -120,32 +120,19 @@ h4 {
 
 /* Home */
 
+.hero-content-container {
+	padding: 3% 0% 3% 0%;
+}
+
 .hero-home {
-	position: relative;
-	height: 55vh;
 	background: #353b48;
 	color: #FFFFFF;
 	font-weight: bold;
+	padding: 5% 0% 5% 0%;
 }
 
-@media (max-width: 770px) {
-.hero-home {
-	height: 55vh;
- }
- .hero-home h1 {
-     font-size: 2.225rem;
-   }
-}
-
-@media (max-width: 325px) {
-.hero-home {
-	height: 62vh;
- }
-}
-
-.intro{
-	letter-spacing: 2px;
-	vertical-align: middle;
+.hero-content-2 {
+	padding-bottom: 2%;
 }
 
 .hero-content {
