@@ -1,140 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Joshua's Portfolio | Work Page</title>
-    <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-  </head>
-  <body>
-    <div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="work.html" class="active">Work</a></li>
-        </ul>
-      </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selected work by Josh Serpis — UX, UI, branding and front-end development projects.">
+  <meta name="theme-color" content="#101415">
+  <title>Work — Josh Serpis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
+
+  <!-- page transition surfaces -->
+  <div class="warp-in" aria-hidden="true"></div>
+  <div class="warp-out" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="container">
+      <a class="brand" href="index.html">Josh<span>.</span>Serpis<small>Designer / Developer</small></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html" class="active" aria-current="page">Work</a></li>
+        <li><a href="mailto:joshserpis@gmail.com">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="universe" aria-label="Open menu">
+        <i></i><i></i><i></i>
+      </button>
     </div>
-    <main id="work">
-      <h2 class="my-work">View My Work</h2>
+  </nav>
+
+  <!-- ============================ THE UNIVERSE ============================ -->
+  <div class="universe grain" id="universe" aria-hidden="true">
+    <svg class="universe-orbits" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+      <ellipse cx="500" cy="500" rx="180" ry="120"/>
+      <ellipse cx="500" cy="500" rx="290" ry="196"/>
+      <ellipse cx="500" cy="500" rx="400" ry="272"/>
+      <ellipse cx="500" cy="500" rx="490" ry="340"/>
+    </svg>
+
+    <span class="universe-core" aria-hidden="true"></span>
+    <span class="ray" style="--a:-31deg; --len:34vw; --d:.14s"></span>
+    <span class="ray" style="--a:7deg;   --len:44vw; --d:.20s"></span>
+    <span class="ray" style="--a:-63deg; --len:32vw; --d:.26s"></span>
+    <span class="ray" style="--a:41deg;  --len:40vw; --d:.32s"></span>
+    <span class="ray" style="--a:139deg; --len:46vw; --d:.38s"></span>
+
+    <span class="planet" data-planet="home"    style="--s:clamp(90px,11vw,150px); --x:26vw; --y:-24vh; --c:var(--amber);       --d:.16s; --dur:15s; --dx:18px;  --dy:-24px"></span>
+    <span class="planet" data-planet="about"   style="--s:clamp(64px,7vw,96px);   --x:40vw; --y:6vh;   --c:var(--indigo-lift); --d:.22s; --dur:12s; --dx:-16px; --dy:18px"></span>
+    <span class="planet" data-planet="work"    style="--s:60px; --x:33vw; --y:30vh;  --c:var(--amber-deep);  --d:.30s; --dur:17s; --dx:22px;  --dy:14px"></span>
+    <span class="planet" data-planet="contact" style="--s:46px; --x:20vw; --y:19vh;  --c:var(--indigo-lift); --d:.36s; --dur:13s; --dx:-20px; --dy:-16px"></span>
+    <span class="planet" style="--s:clamp(120px,17vw,220px); --x:-52vw; --y:48vh; --c:var(--indigo); --d:.20s; --dur:20s; --dx:26px; --dy:-18px"></span>
+    <span class="planet" style="--s:20px; --x:16vw;  --y:-33vh; --c:var(--paper); --d:.40s; --dur:11s; --dx:-14px; --dy:20px"></span>
+    <span class="planet" style="--s:12px; --x:44vw;  --y:-30vh; --c:var(--paper); --d:.44s; --dur:14s; --dx:16px;  --dy:16px"></span>
+    <span class="planet" style="--s:34px; --x:8vw;   --y:34vh;  --c:var(--amber); --d:.48s; --dur:16s; --dx:-18px; --dy:-20px"></span>
+    <span class="planet" style="--s:26px; --x:-31vw; --y:-36vh; --c:var(--amber); --d:.52s; --dur:18s; --dx:20px;  --dy:18px"></span>
+
+    <div class="universe-inner">
       <div class="container">
-        <div class="row work-row">
-          <div class="col-md work-img">
-            <img src="./images/preactiv-logo.png" alt="" width="250px" height="250px">
+        <p class="eyebrow u-eyebrow">Navigate</p>
+        <ul class="u-list">
+          <li class="u-item" style="--i:0"><a class="u-link" href="index.html" data-planet="home"><span class="link-text">Home</span></a></li>
+          <li class="u-item" style="--i:1"><a class="u-link" href="about.html" data-planet="about"><span class="link-text">About</span></a></li>
+          <li class="u-item" style="--i:2"><a class="u-link" href="work.html" data-planet="work"><span class="link-text">Work</span></a></li>
+          <li class="u-item" style="--i:3"><a class="u-link" href="mailto:joshserpis@gmail.com" data-planet="contact"><span class="link-text">Contact</span></a></li>
+        </ul>
+
+        <div class="u-meta">
+          <div>
+            <h4>Say hello</h4>
+            <a class="u-mail" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com</a>
           </div>
-          <div class="col-md preactiv">
-            <h2>Preactiv</h2>
-            <p>This was truly a great project to work on. I had the pleasure of working with Bath NHS trust, designing an app which would help those get fit before their operation.</p>
-            <p>UX/UI Designer | Joshua Serpis</p>
-            <a href="portfolio/preactiv.html">Learn More</a>
-            <a href="https://preactiv.co.uk/" target="_blank">Live Project</a>
+          <div>
+            <h4>Based in</h4>
+            <p class="u-where">South West England — working with clients anywhere.</p>
           </div>
-        </div>
-        <div class="row work-row">
-          <div class="col-md one-guys">
-              <h2>One Guys</h2>
-              <p>The One Guys where excited to utilize Wordpress plugins to their max and create a portal in which users could be directed to make better desisons in their weight loss journeys.</p>
-                  <p class="roles">UX/UI Designer | Joshua Serpis</p>
-                  <p>Development | Joshua Serpis, Jamie Greatorex</p>
-              <a href="portfolio/one-guys.html">Learn More</a>
-          </div>
-          <div class="col one-guys-img work-img">
-            <img src="./images/one-logo.png" alt="" width="250px" height="250px">
-          </div>
-        </div>
-        <div class="row work-row">
-          <div class="col work-img">
-            <img src="./images/fibre-logo.svg" alt="" width="250px" height="250px">
-          </div>
-          <div class="col fibre">
-            <h2>Fibre Gaming</h2>
-            <p>Fibre Gaming wanted a platform which they could spread news to their fans whilst enhancing their google search results using Wordpress to also post blogs and updates about their business.</p>
-            <p>Development | Joshua Serpis, Jamie Greatorex</p>
-                <div class="work-cta">
-                    <a href="portfolio/fibre.html">Learn More</a>
-                </div>
-          </div>
-        </div>
-        <div class="row work-row">
-           <div class="col lm">
-              <h2>LM Expert Tuition</h2>
-              <p>LM Expert Tuition needed a website where they could sell their products and promote their growing tutoring buisness, to do this they wanted to use wordpress. They also asked me to go through the entire UX process so that they could further understand the current market and what it lacked.</p>
-              <p>UX/UI & Development | Joshua Serpis</p>
-              <a href="portfolio/lm-education.html">Learn More</a>
-          </div>
-          <div class="col lm-img work-img">
-            <img src="./images/lm-logo.png" alt="" width="250px" height="250px">
-          </div>
-        </div>
-        <div class="row work-row">
-          <div class="col work-img">
-            <img src="./images/val-logo.png" alt="" width="350px" height="250px">
-          </div>
-          <div class="col">
-            <h2>ValHQ</h2>
-            <p>ValHQ came to me with a clear vision of what they wanted and how they wanted it done, creating a place where competitors could signup for tournaments and compete for cash prizes.</p>
-            <p>Development | Joshua Serpis & Valhq Founders</p>
-                <div class="work-cta">
-                    <a href="portfolio/valhq.html">Learn More</a>
-                    <a href="https://valhq.com/" target="_blank">Live Project</a>
-                </div>
-          </div>
-        </div>
-        <div class="row work-row">
-           <div class="col lm">
-              <h2>Bristol Kitchen Company</h2>
-              <p> The Bristol Kitchen Company came to me with a proposal of the content they needed on their website, having also hired a seperate UX designer and developer to build their website, all they needed was a pixel perfect scalable design which I could provide for them, working with the UX designers research.</p>
-              <p>UI Designer | Joshua Serpis</p>
-              <a href="portfolio/bristol-kitchens.html">Learn More</a>
-              <a href="https://thebristolkitchencompany.co.uk/" target="_blank">Live Project</a>
-          </div>
-          <div class="col lm-img work-img">
-            <img src="./images/bristol-kitchen-1.png" alt="" width="450px" height="150px">
+          <div>
+            <h4>Elsewhere</h4>
+            <div class="u-social">
+              <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
+              <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
+              <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
+            </div>
           </div>
         </div>
       </div>
-    </main>
-    <footer>
-        <div class="container">
-         <div class="row">
-           <div class="col-md-9">
-                 <ul class="nav-footer">
-                   <li><a href="index.html" class="active">Home</a></li>
-                   <li><a href="about.html">About</a></li>
-                   <li><a href="work.html">Work</a></li>
-                 </ul>
-           </div>
-           <div class="col-md-3">
-               <p class="follow">Follow Me</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-md-9 footer-email">
-               <a class="footer-email align-middle" href="mailto:joshserpis@gmail.com">Email: joshserpis@gmail.com</a>
-           </div>
-           <div class="col-md-3 social-images">
-                <a href="https://twitter.com/Joshua_serpis" target="_blank">
-                   <img src="images/twitter.png" alt="Twitter" width="20" height="20">
-                </a>
-                <a href="https://github.com/Styrle" target="_blank">
-                   <img src="images/github.png" alt="Github" width="20" height="20">
-               </a>
-               <a href="https://codepen.io/joshuaserpis" target="_blank">
-                   <img src="images/codepen.png" alt="Codepen" width="20" height="20">
-               </a>
-           </div>
-         </div>
-       </div>
-      <hr class="footer-divider">
-      <div class="row">
-        <div class="col-md">
-            <p class="float-right">© 2020 Serpex Studios</p>
-        </div>
+    </div>
+  </div>
+
+  <main>
+    <header class="page-hero" data-lit>
+      <div class="orbit-field" aria-hidden="true">
+        <svg class="orbit-rings" viewBox="0 0 1000 700" focusable="false">
+          <ellipse cx="500" cy="350" rx="210" ry="140"/>
+          <ellipse cx="500" cy="350" rx="340" ry="226"/>
+          <ellipse cx="500" cy="350" rx="470" ry="312"/>
+        </svg>
+        <span class="orb orb--float" style="--s:clamp(110px,15vw,220px); --t:8%; --l:68%; --c:var(--amber); --depth:1; --d:.3s; --dur:12s; --dy:-24px;"></span>
+        <span class="orb" style="--s:clamp(56px,6vw,84px); --t:58%; --l:86%; --c:var(--indigo); --depth:1.8; --d:.44s;"></span>
+        <span class="orb orb--float" style="--s:30px; --t:72%; --l:62%; --c:var(--amber-deep); --depth:2.4; --d:.54s; --dur:9s; --dy:18px;"></span>
+        <span class="orb" style="--s:16px; --t:26%; --l:56%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
       </div>
-    </footer>
-  </body>
+      <div class="container">
+        <p class="eyebrow">Selected work</p>
+        <h1>
+          <span class="rise-line"><span>Concept to</span></span>
+          <span class="rise-line"><span style="--d:.1s">shipped.</span></span>
+        </h1>
+        <p class="lede sweep" style="--d:.3s">Health apps, esports platforms, tuition start-ups and kitchen showrooms — every project below went from research and wireframes to a live product.</p>
+      </div>
+    </header>
+
+    <section class="work-index" style="padding-top:clamp(24px,4vh,48px)">
+      <div class="container">
+        <ul class="work-list reveal" data-preview-list>
+          <li><a class="work-row" href="portfolio/preactiv.html" data-preview="preactiv">
+            <span class="work-no">01</span>
+            <h3>Preactiv</h3>
+            <span class="work-tag">UX / UI · NHS</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/valhq.html" data-preview="valhq">
+            <span class="work-no">02</span>
+            <h3>ValHQ</h3>
+            <span class="work-tag">Web Development</span>
+            <span class="work-year">2021</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/bristol-kitchens.html" data-preview="bristol">
+            <span class="work-no">03</span>
+            <h3>Bristol Kitchen Company</h3>
+            <span class="work-tag">UI Design</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/lm-education.html" data-preview="lm">
+            <span class="work-no">04</span>
+            <h3>LM Expert Tuition</h3>
+            <span class="work-tag">UX / UI + Dev</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/fibre.html" data-preview="fibre">
+            <span class="work-no">05</span>
+            <h3>Fibre Gaming</h3>
+            <span class="work-tag">Branding + Web</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/one-guys.html" data-preview="one">
+            <span class="work-no">06</span>
+            <h3>One Guys</h3>
+            <span class="work-tag">Design + Dev</span>
+            <span class="work-year">2017</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/somerset-bees.html" data-preview="bees">
+            <span class="work-no">07</span>
+            <h3>Somerset Bees</h3>
+            <span class="work-tag">Web Design</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/zero-limitations.html" data-preview="zero">
+            <span class="work-no">08</span>
+            <h3>Zero Limitations</h3>
+            <span class="work-tag">Design + Dev</span>
+            <span class="work-year">2017</span>
+          </a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="work-preview" aria-hidden="true">
+      <img data-key="preactiv" src="images/preactiv-img-1.png" alt="" loading="lazy">
+      <img data-key="valhq" src="images/val-img-1.png" alt="" loading="lazy">
+      <img data-key="bristol" src="images/bristol-kitchen-1.png" alt="" loading="lazy">
+      <img data-key="lm" src="images/lm-img-2.png" alt="" loading="lazy">
+      <img data-key="fibre" src="images/fibre-img-2.png" alt="" loading="lazy">
+      <img data-key="one" src="images/one-img-1.png" alt="" loading="lazy">
+      <img data-key="bees" src="images/bee-logo.png" alt="" loading="lazy">
+      <img data-key="zero" src="images/one-img-2.png" alt="" loading="lazy">
+    </div>
+
+    <section class="big-cta grain" data-lit>
+      <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
+      <span class="cta-orb cta-orb--a" aria-hidden="true"></span>
+      <div class="container">
+        <p class="eyebrow">Like what you see?</p>
+        <h2>
+          <span class="rise-line"><span>Let's build</span></span>
+          <span class="rise-line"><span style="--d:.1s">something together.</span></span>
+        </h2>
+        <p>I'm currently open for freelance and full-time opportunities. Tell me about your idea and I'll get back to you within a day.</p>
+        <a class="btn btn-light" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html">Work</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
+        <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
+        <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
+      </div>
+      <p class="footer-meta">&copy; <span data-year>2026</span> Josh Serpis &middot; Serpex Studios &middot; Built by hand, no frameworks</p>
+    </div>
+  </footer>
+
+  <div class="hud-bar" aria-hidden="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
 </html>

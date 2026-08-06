@@ -1,151 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Joshua Serpis Web & UX Development">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Josh Serpis — designer-developer building interfaces for the web. UX, UI and front-end development.">
+  <meta name="theme-color" content="#101415">
+  <title>Josh Serpis — Designer &amp; Front-End Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
 
-    <title>Joshua's Portfolio | Home Page</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-  </head>
-  <body>
-      <nav>
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="work.html">Work</a></li>
+  <!-- page transition surfaces -->
+  <div class="warp-in" aria-hidden="true"></div>
+  <div class="warp-out" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="container">
+      <a class="brand" href="index.html">Josh<span>.</span>Serpis<small>Designer / Developer</small></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="mailto:joshserpis@gmail.com">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="universe" aria-label="Open menu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================ THE UNIVERSE ============================ -->
+  <div class="universe grain" id="universe" aria-hidden="true">
+    <svg class="universe-orbits" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+      <ellipse cx="500" cy="500" rx="180" ry="120"/>
+      <ellipse cx="500" cy="500" rx="290" ry="196"/>
+      <ellipse cx="500" cy="500" rx="400" ry="272"/>
+      <ellipse cx="500" cy="500" rx="490" ry="340"/>
+    </svg>
+
+    <span class="universe-core" aria-hidden="true"></span>
+    <span class="ray" style="--a:-31deg; --len:34vw; --d:.14s"></span>
+    <span class="ray" style="--a:7deg;   --len:44vw; --d:.20s"></span>
+    <span class="ray" style="--a:-63deg; --len:32vw; --d:.26s"></span>
+    <span class="ray" style="--a:41deg;  --len:40vw; --d:.32s"></span>
+    <span class="ray" style="--a:139deg; --len:46vw; --d:.38s"></span>
+
+    <span class="planet" data-planet="home"    style="--s:clamp(90px,11vw,150px); --x:26vw; --y:-24vh; --c:var(--amber);       --d:.16s; --dur:15s; --dx:18px;  --dy:-24px"></span>
+    <span class="planet" data-planet="about"   style="--s:clamp(64px,7vw,96px);   --x:40vw; --y:6vh;   --c:var(--indigo-lift); --d:.22s; --dur:12s; --dx:-16px; --dy:18px"></span>
+    <span class="planet" data-planet="work"    style="--s:60px; --x:33vw; --y:30vh;  --c:var(--amber-deep);  --d:.30s; --dur:17s; --dx:22px;  --dy:14px"></span>
+    <span class="planet" data-planet="contact" style="--s:46px; --x:20vw; --y:19vh;  --c:var(--indigo-lift); --d:.36s; --dur:13s; --dx:-20px; --dy:-16px"></span>
+    <span class="planet" style="--s:clamp(120px,17vw,220px); --x:-52vw; --y:48vh; --c:var(--indigo); --d:.20s; --dur:20s; --dx:26px; --dy:-18px"></span>
+    <span class="planet" style="--s:20px; --x:16vw;  --y:-33vh; --c:var(--paper); --d:.40s; --dur:11s; --dx:-14px; --dy:20px"></span>
+    <span class="planet" style="--s:12px; --x:44vw;  --y:-30vh; --c:var(--paper); --d:.44s; --dur:14s; --dx:16px;  --dy:16px"></span>
+    <span class="planet" style="--s:34px; --x:8vw;   --y:34vh;  --c:var(--amber); --d:.48s; --dur:16s; --dx:-18px; --dy:-20px"></span>
+    <span class="planet" style="--s:26px; --x:-31vw; --y:-36vh; --c:var(--amber); --d:.52s; --dur:18s; --dx:20px;  --dy:18px"></span>
+
+    <div class="universe-inner">
+      <div class="container">
+        <p class="eyebrow u-eyebrow">Navigate</p>
+        <ul class="u-list">
+          <li class="u-item" style="--i:0"><a class="u-link" href="index.html" data-planet="home"><span class="link-text">Home</span></a></li>
+          <li class="u-item" style="--i:1"><a class="u-link" href="about.html" data-planet="about"><span class="link-text">About</span></a></li>
+          <li class="u-item" style="--i:2"><a class="u-link" href="work.html" data-planet="work"><span class="link-text">Work</span></a></li>
+          <li class="u-item" style="--i:3"><a class="u-link" href="mailto:joshserpis@gmail.com" data-planet="contact"><span class="link-text">Contact</span></a></li>
         </ul>
-      </nav>
-      <main>
-      <header class="hero-home jumbotron jumbotron-fluid">
-        <div class="container hero-content-container">
-            <h4 class="hero-content-2">Hello, my name is Josh Serpis</h4>
-            <h2 class="hero-content">I'm a Junior Developer. Working In UI, UX, And Front End Development.</h2>
-        </div>
-        <div class="cta">
-          <a href="work.html">View My Work</a>
-        </div>
-      </header>
-     <section>
-         <div class="container">
-          <div class="row">
-            <div class="col-md-4 big-box">
-                <h1>3+</h1>
-                <h3>Years Experience</h3>
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col mini-box-title">
-                    <h3>Check out some of my recent work, from concept to finished product</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md mini-box">
-                    <img src="./images/coding.svg" alt="Front end icon">
-                    <p>Front End Development</p>
-                    <a href="./portfolio/valhq.html">Discover More</a>
-                </div>
-                <div class="col-lg mini-box">
-                    <img src="./images/ux.svg" alt="UI/UX icon">
-                    <p>UX/UI</p>
-                    <a href="./portfolio/preactiv.html">Discover More</a>
-                </div>
-                <div class="col-lg mini-box">
-                    <img src="./images/branding.svg" alt="Branding icon">
-                    <p>Branding</p>
-                    <a href="./portfolio/fibre.html">Discover More</a>
-                </div>
-              </div>
+
+        <div class="u-meta">
+          <div>
+            <h4>Say hello</h4>
+            <a class="u-mail" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com</a>
+          </div>
+          <div>
+            <h4>Based in</h4>
+            <p class="u-where">South West England — working with clients anywhere.</p>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <div class="u-social">
+              <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
+              <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
+              <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
             </div>
           </div>
         </div>
-     </section>
-     <section id="">
-         <div class="container">
-             <div class="row">
-               <div class="col">
-                    <p></p>
-                    <p></p>
-               </div>
-             </div>
-             <div class="row">
-               <div class="col">
-                   <img src="" alt="">
-               </div>
-               <div class="col">
-               </div>
-               <div class="col">
-               </div>
-               <div class="col">
-               </div>
-            </div>
-        </div>
-     </section>
-     <section>
-         <div class="container working-with">
-             <div class="row">
-               <div class="col">
-                   <h4>I’m proud to have worked with some amazing companies</h4>
-               </div>
-             </div>
-             <div class="row">
-               <div class="col-md text-center align-items-center">
-                   <img src="./images/lm-logo.png" alt="" width="250px" height="250px">
-               </div>
-               <div class="col-md text-center">
-                   <img src="./images/bee-logo.png" alt="" width="220px" height="220px">
-               </div>
-               <div class="col-md text-center align-items-center">
-                   <img src="./images/one-logo.png" alt="One Guys Logo" width="200px" height="200px">
-               </div>
-               <div class="col-md text-center ">
-                   <img src="./images/fibre-logo.svg" alt="Codewest Logo" width="200px" height="200px">
-               </div>
-            </div>
-        </div>
-     </section>
-    </main>
-    <footer>
-        <div class="container">
-         <div class="row">
-           <div class="col-md-9">
-                 <ul class="nav-footer">
-                   <li><a href="index.html" class="active">Home</a></li>
-                   <li><a href="about.html">About</a></li>
-                   <li><a href="work.html">Work</a></li>
-                 </ul>
-           </div>
-           <div class="col-md-3">
-               <p class="follow">Follow Me</p>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-md-9 footer-email">
-               <a class="footer-email align-middle" href="mailto:joshserpis@gmail.com">Email: joshserpis@gmail.com</a>
-           </div>
-           <div class="col-md-3 social-images">
-                <a href="https://twitter.com/Joshua_serpis" target="_blank">
-                   <img src="images/twitter.png" alt="Twitter" width="20" height="20">
-                </a>
-                <a href="https://github.com/Styrle" target="_blank">
-                   <img src="images/github.png" alt="Github" width="20" height="20">
-               </a>
-               <a href="https://codepen.io/joshuaserpis" target="_blank">
-                   <img src="images/codepen.png" alt="Codepen" width="20" height="20">
-               </a>
-           </div>
-         </div>
-       </div>
-      <hr class="footer-divider">
-      <div class="row">
-        <div class="col-md">
-            <p class="float-right">© 2020 Serpex Studios</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD -->
+  <div class="hud-bar" aria-hidden="true"></div>
+  <div class="hud" aria-hidden="true">
+    <b data-hud-current>01</b><span>/ <span data-hud-total>06</span></span>
+  </div>
+
+  <main>
+
+    <!-- 01 ============================= HERO ============================= -->
+    <header class="hero" data-section="01" data-lit>
+      <div class="orbit-field" aria-hidden="true">
+        <svg class="orbit-rings" viewBox="0 0 1000 700" focusable="false">
+          <ellipse cx="500" cy="350" rx="200" ry="132"/>
+          <ellipse cx="500" cy="350" rx="320" ry="212"/>
+          <ellipse cx="500" cy="350" rx="440" ry="292"/>
+        </svg>
+        <span class="orb orb--float" style="--s:clamp(150px,20vw,300px); --t:16%; --l:60%; --c:var(--amber); --depth:1; --d:.35s; --dur:11s; --dy:-30px"></span>
+        <span class="orb" style="--s:clamp(70px,8vw,118px); --t:60%; --l:79%; --c:var(--indigo); --depth:1.7; --d:.5s"></span>
+        <span class="orb orb--float" style="--s:44px; --t:11%; --l:87%; --c:var(--amber-deep); --depth:2.3; --d:.62s; --dur:8s; --dy:22px"></span>
+        <span class="orb" style="--s:22px; --t:47%; --l:54%; --c:var(--indigo-lift); --depth:3; --d:.7s"></span>
+        <span class="orb orb--float" style="--s:66px; --t:79%; --l:45%; --c:var(--amber); --depth:1.4; --d:.76s; --dur:13s; --dy:-20px"></span>
+        <span class="orb" style="--s:30px; --t:33%; --l:93%; --c:var(--amethyst); --depth:2.6; --d:.82s"></span>
+      </div>
+
+      <div class="container">
+        <p class="eyebrow">Open to work — UK / remote</p>
+        <p class="hero-intro">Designing and building interfaces people actually enjoy using.</p>
+        <h1>
+          <span class="rise-line"><span>Josh</span></span>
+          <span class="rise-line"><span>Serpis</span></span>
+        </h1>
+        <p class="hero-role">
+          <span>Designer</span><span>Front-end developer</span><span>South West England</span>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="work.html">View my work <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-ghost" href="about.html">About me</a>
         </div>
       </div>
-    </footer>
-  </body>
+
+      <a class="scroll-cue" href="#approach"><i aria-hidden="true"></i>Scroll</a>
+    </header>
+
+    <!-- 02 =========================== STATEMENT ========================== -->
+    <section class="statement grain" id="approach" data-section="02" data-lit aria-labelledby="approach-title">
+      <div class="container">
+        <div>
+          <p class="eyebrow">The approach</p>
+          <h2 id="approach-title">
+            <span class="rise-line"><span>One person,</span></span>
+            <span class="rise-line"><span style="--d:.1s">start to finish.</span></span>
+          </h2>
+        </div>
+        <p class="sweep" style="--d:.3s">Research, wireframes, interface design, then the build itself — one thread from first sketch to shipped code, with no handover gaps in the middle. NHS health apps, esports platforms, tuition start-ups and kitchen showrooms have all come through it.</p>
+      </div>
+    </section>
+
+    <!-- 03 ========================== WORK INDEX ========================== -->
+    <section class="work-index" data-section="03" aria-labelledby="work-title">
+      <div class="container">
+        <div class="work-index-head reveal">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2 id="work-title">Recent projects</h2>
+          </div>
+          <a class="btn btn-ghost" href="work.html">All projects <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </div>
+
+        <ul class="work-list reveal" data-preview-list>
+          <li><a class="work-row" href="portfolio/preactiv.html" data-preview="preactiv">
+            <span class="work-no">01</span>
+            <h3>Preactiv</h3>
+            <span class="work-tag">UX / UI</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/valhq.html" data-preview="valhq">
+            <span class="work-no">02</span>
+            <h3>ValHQ</h3>
+            <span class="work-tag">Development</span>
+            <span class="work-year">2021</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/bristol-kitchens.html" data-preview="bristol">
+            <span class="work-no">03</span>
+            <h3>Bristol Kitchen Company</h3>
+            <span class="work-tag">UI Design</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/lm-education.html" data-preview="lm">
+            <span class="work-no">04</span>
+            <h3>LM Expert Tuition</h3>
+            <span class="work-tag">UX / UI + Dev</span>
+            <span class="work-year">2020</span>
+          </a></li>
+          <li><a class="work-row" href="portfolio/fibre.html" data-preview="fibre">
+            <span class="work-no">05</span>
+            <h3>Fibre Gaming</h3>
+            <span class="work-tag">Branding</span>
+            <span class="work-year">2020</span>
+          </a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="work-preview" aria-hidden="true">
+      <img data-key="preactiv" src="images/preactiv-img-1.png" alt="" loading="lazy">
+      <img data-key="valhq" src="images/val-img-1.png" alt="" loading="lazy">
+      <img data-key="bristol" src="images/bristol-kitchen-1.png" alt="" loading="lazy">
+      <img data-key="lm" src="images/lm-img-2.png" alt="" loading="lazy">
+      <img data-key="fibre" src="images/fibre-img-2.png" alt="" loading="lazy">
+    </div>
+
+    <!-- 04 ========================= CONSTELLATION ======================== -->
+    <section class="constellation grain" data-section="04" data-lit aria-labelledby="cap-title">
+      <svg class="constellation-art" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <g>
+          <line x1="830" y1="330" x2="1090" y2="150" style="--d:.05s"/>
+          <line x1="830" y1="330" x2="620" y2="120" style="--d:.12s"/>
+          <line x1="830" y1="330" x2="1130" y2="520" style="--d:.19s"/>
+          <line x1="830" y1="330" x2="700" y2="600" style="--d:.26s"/>
+          <line x1="830" y1="330" x2="960" y2="650" style="--d:.33s"/>
+          <line x1="830" y1="330" x2="540" y2="400" style="--d:.4s"/>
+        </g>
+        <circle cx="830" cy="330" r="7" fill="#ffc329" style="--d:0s"/>
+        <circle cx="1090" cy="150" r="52" fill="#4648d4" style="--d:.25s"/>
+        <circle cx="620" cy="120" r="26" fill="#ffc329" style="--d:.32s"/>
+        <circle cx="1130" cy="520" r="66" fill="#4648d4" style="--d:.39s"/>
+        <circle cx="700" cy="600" r="38" fill="#e5a300" style="--d:.46s"/>
+        <circle cx="960" cy="650" r="18" fill="#7d7ef0" style="--d:.53s"/>
+        <circle cx="540" cy="400" r="10" fill="#f9f9ff" style="--d:.6s"/>
+      </svg>
+
+      <div class="container">
+        <p class="eyebrow">Capabilities</p>
+        <h2 id="cap-title">
+          <span class="rise-line"><span>Three ways</span></span>
+          <span class="rise-line"><span style="--d:.1s">I can help.</span></span>
+        </h2>
+        <p class="constellation-lead">Most projects need two of these. A few need all three — which is usually where I'm most useful.</p>
+
+        <div class="cap-grid">
+          <article class="cap-card reveal">
+            <span class="cap-mark"><img src="images/coding.svg" alt="" aria-hidden="true"></span>
+            <h3>Front-end development</h3>
+            <p>Clean, responsive builds — from WordPress platforms with payment integration to hand-coded sites like this one.</p>
+            <a href="portfolio/valhq.html">See it in ValHQ &rarr;</a>
+          </article>
+          <article class="cap-card reveal" style="--d:.1s">
+            <span class="cap-mark"><img src="images/ux.svg" alt="" aria-hidden="true"></span>
+            <h3>UX &amp; UI design</h3>
+            <p>Research, personas, user flows and pixel-perfect interfaces — designed to be accessible for every audience.</p>
+            <a href="portfolio/preactiv.html">See it in Preactiv &rarr;</a>
+          </article>
+          <article class="cap-card reveal" style="--d:.2s">
+            <span class="cap-mark"><img src="images/branding.svg" alt="" aria-hidden="true"></span>
+            <h3>Branding</h3>
+            <p>Visual identities that carry across web, social and stream — one consistent theme, tied back to the brand.</p>
+            <a href="portfolio/fibre.html">See it in Fibre &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 =========================== CLIENTS ============================ -->
+    <section class="marquee-section" data-section="05" aria-label="Clients">
+      <p class="marquee-label">Proud to have worked with</p>
+      <div class="marquee">
+        <div class="marquee-track">
+          <img src="images/lm-logo.png" alt="LM Expert Tuition">
+          <img src="images/bee-logo.png" alt="Somerset Bees">
+          <img src="images/one-logo.png" alt="One Guys">
+          <img src="images/fibre-logo.svg" alt="Fibre Gaming">
+          <img src="images/preactiv-logo.png" alt="Preactiv">
+          <img src="images/val-logo.png" alt="ValHQ">
+          <!-- duplicated for a seamless loop -->
+          <img src="images/lm-logo.png" alt="" aria-hidden="true">
+          <img src="images/bee-logo.png" alt="" aria-hidden="true">
+          <img src="images/one-logo.png" alt="" aria-hidden="true">
+          <img src="images/fibre-logo.svg" alt="" aria-hidden="true">
+          <img src="images/preactiv-logo.png" alt="" aria-hidden="true">
+          <img src="images/val-logo.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 ============================= CTA ============================== -->
+    <section class="big-cta grain" data-section="06" data-lit>
+      <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
+      <span class="cta-orb cta-orb--a" aria-hidden="true"></span>
+      <div class="container">
+        <p class="eyebrow">Got a project in mind?</p>
+        <h2>
+          <span class="rise-line"><span>Let's build</span></span>
+          <span class="rise-line"><span style="--d:.1s">something together.</span></span>
+        </h2>
+        <p>I'm currently open for freelance and full-time opportunities. Tell me about your idea and I'll get back to you within a day.</p>
+        <a class="btn btn-light" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html">Work</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
+        <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
+        <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
+      </div>
+      <p class="footer-meta">&copy; <span data-year>2026</span> Josh Serpis &middot; Serpex Studios &middot; Built by hand, no frameworks</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
 </html>
