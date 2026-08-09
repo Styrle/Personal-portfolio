@@ -72,7 +72,30 @@
 
   if (toggle && universe) {
     var planets = universe.querySelectorAll(".planet");
+    var keyedPlanets = universe.querySelectorAll(".planet[data-planet]");
+    var uLinks = universe.querySelectorAll(".u-link");
+    var uList = universe.querySelector(".u-list");
     var lastFocus = null;
+
+    /* One pair of functions drives the highlight, so hovering a planet and
+       hovering its menu item produce exactly the same state. */
+    function focusKey(key) {
+      universe.classList.add("dim");
+      if (uList) uList.classList.add("dim");
+      planets.forEach(function (pl) {
+        pl.classList.toggle("is-hot", pl.getAttribute("data-planet") === key);
+      });
+      uLinks.forEach(function (l) {
+        l.classList.toggle("is-hot", l.getAttribute("data-planet") === key);
+      });
+    }
+
+    function clearKey() {
+      universe.classList.remove("dim");
+      if (uList) uList.classList.remove("dim");
+      planets.forEach(function (pl) { pl.classList.remove("is-hot"); });
+      uLinks.forEach(function (l) { l.classList.remove("is-hot"); });
+    }
 
     function setMenu(open) {
       universe.classList.toggle("is-open", open);
@@ -87,8 +110,7 @@
         var first = universe.querySelector(".u-link");
         if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 520);
       } else {
-        universe.classList.remove("dim");
-        planets.forEach(function (p) { p.classList.remove("is-hot"); });
+        clearKey();
         if (lastFocus) lastFocus.focus({ preventScroll: true });
       }
     }
@@ -103,7 +125,7 @@
       if (e.key !== "Tab") return;
 
       var focusable = [toggle].concat(
-        Array.prototype.slice.call(universe.querySelectorAll("a[href], button"))
+        Array.prototype.slice.call(universe.querySelectorAll(".u-link, .u-meta a, button"))
       );
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
@@ -114,26 +136,23 @@
       }
     });
 
-    /* Hovering a menu item lights its planet and dims the rest of the system */
-    universe.querySelectorAll(".u-link").forEach(function (link) {
+    /* Menu item -> planet */
+    uLinks.forEach(function (link) {
       var key = link.getAttribute("data-planet");
-      function on() {
-        universe.classList.add("dim");
-        planets.forEach(function (p) {
-          p.classList.toggle("is-hot", p.getAttribute("data-planet") === key);
-        });
-      }
-      function off() {
-        universe.classList.remove("dim");
-        planets.forEach(function (p) { p.classList.remove("is-hot"); });
-      }
-      link.addEventListener("mouseenter", on);
-      link.addEventListener("mouseleave", off);
-      link.addEventListener("blur", off);
+      link.addEventListener("mouseenter", function () { focusKey(key); });
+      link.addEventListener("mouseleave", clearKey);
+      link.addEventListener("blur", clearKey);
       link.addEventListener("focus", function () {
         /* programmatic focus on open shouldn't fire the hover state */
-        try { if (link.matches(":focus-visible")) on(); } catch (err) { /* older browsers */ }
+        try { if (link.matches(":focus-visible")) focusKey(key); } catch (err) { /* older browsers */ }
       });
+    });
+
+    /* Planet -> menu item (and the planet itself navigates) */
+    keyedPlanets.forEach(function (pl) {
+      var key = pl.getAttribute("data-planet");
+      pl.addEventListener("mouseenter", function () { focusKey(key); });
+      pl.addEventListener("mouseleave", clearKey);
     });
   }
 
@@ -209,16 +228,39 @@
     }, { passive: true });
   }
 
-  if (field && !reduced) {
-    var fieldTick = false;
+  /* Scroll-linked shape work: --sy drives drift, --sp (0-1 through the hero)
+     drives growth, rotation and the circle-to-squircle morph. Each orb scales
+     those with its own --driftX/--driftY/--grow/--spin/--morph. */
+  var hero = document.querySelector(".hero");
+  var ctaSection = document.querySelector(".big-cta");
+  if ((field || ctaSection) && !reduced) {
+    var shapeTick = false;
+
+    function shapeScroll() {
+      var y = window.scrollY;
+      var vh = window.innerHeight;
+
+      if (field && hero) {
+        var span = hero.offsetHeight || vh;
+        field.style.setProperty("--sy", y.toFixed(1) + "px");
+        field.style.setProperty("--sp", Math.min(1, y / span).toFixed(4));
+      }
+
+      if (ctaSection) {
+        var box = ctaSection.getBoundingClientRect();
+        /* 0 as the section enters the viewport, 1 once it's fully arrived */
+        var cp = 1 - Math.min(1, Math.max(0, box.top / vh));
+        ctaSection.style.setProperty("--cp", cp.toFixed(4));
+      }
+
+      shapeTick = false;
+    }
+
     window.addEventListener("scroll", function () {
-      if (fieldTick) return;
-      fieldTick = true;
-      requestAnimationFrame(function () {
-        field.style.transform = "translate3d(0," + (window.scrollY * 0.16).toFixed(1) + "px,0)";
-        fieldTick = false;
-      });
+      if (!shapeTick) { shapeTick = true; requestAnimationFrame(shapeScroll); }
     }, { passive: true });
+    window.addEventListener("resize", shapeScroll, { passive: true });
+    shapeScroll();
   }
 
   /* ----------------------------------------------------------------------
@@ -329,7 +371,127 @@
   }
 
   /* ----------------------------------------------------------------------
-     9. Footer year
+     9. Contact form
+     Posts to a form service via fetch, but degrades to a plain POST if the
+     JS never runs. If the endpoint hasn't been configured yet it says so
+     rather than silently swallowing the message.
+     ---------------------------------------------------------------------- */
+  var form = document.querySelector("[data-contact-form]");
+  if (form) {
+    var status = form.querySelector("[data-form-status]");
+    var submit = form.querySelector("button[type=submit]");
+
+    form.addEventListener("submit", function (e) {
+      var action = form.getAttribute("action") || "";
+
+      if (action.indexOf("YOUR_FORM_ID") !== -1 || !action) {
+        e.preventDefault();
+        status.className = "form-status is-err";
+        status.textContent = "This form isn't connected yet — email me directly at joshserpis@gmail.com.";
+        return;
+      }
+
+      if (!window.fetch) return; /* let the browser POST normally */
+
+      e.preventDefault();
+      status.className = "form-status";
+      status.textContent = "Sending…";
+      submit.disabled = true;
+
+      fetch(action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("bad response");
+          form.reset();
+          status.className = "form-status is-ok";
+          status.textContent = "Sent — I'll come back to you within a day.";
+        })
+        .catch(function () {
+          status.className = "form-status is-err";
+          status.textContent = "Something went wrong. Email me at joshserpis@gmail.com instead.";
+        })
+        .then(function () { submit.disabled = false; });
+    });
+  }
+
+
+  /* ----------------------------------------------------------------------
+     10. Intro sequence
+     Three beats, auto-advancing but skippable, and interruptible by scroll,
+     click or key. Only armed once per session by the inline head script.
+     ---------------------------------------------------------------------- */
+  var intro = document.querySelector(".intro");
+  if (intro && document.documentElement.classList.contains("intro-armed")) {
+    var BEATS = 3;
+    var HOLD = 1150;          /* ms per beat  */
+    var step = 0;
+    var stepEl = intro.querySelector("[data-intro-step]");
+    var timer = null;
+    var finished = false;
+
+    function paint() {
+      for (var i = 1; i <= BEATS; i++) intro.classList.toggle("is-beat-" + i, i === step);
+      if (stepEl) stepEl.textContent = ("0" + step).slice(-2);
+    }
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timer);
+      detach();
+      intro.classList.add("is-done");
+      /* keep .intro-armed so main's entrance styles stay; .intro-done releases
+         the scroll lock and drops the delay, then we restart the animation so
+         the hero always rises — even when the intro was skipped at 0.5s */
+      document.documentElement.classList.add("intro-done");
+      var mainEl = document.querySelector("main");
+      if (mainEl && mainEl.getAnimations) {
+        mainEl.getAnimations().forEach(function (a) { a.cancel(); a.play(); });
+      }
+      try { sessionStorage.setItem("jsx-intro", "1"); } catch (err) { /* private mode */ }
+      setTimeout(function () { intro.classList.add("is-gone"); }, 950);
+    }
+
+    function advance() {
+      if (finished) return;
+      step++;
+      if (step > BEATS) { finish(); return; }
+      paint();
+      timer = setTimeout(advance, HOLD);
+    }
+
+    function nudge(e) {
+      if (e && e.type === "keydown" && e.key !== "Enter" && e.key !== " " &&
+          e.key !== "Escape" && e.key !== "ArrowDown") return;
+      clearTimeout(timer);
+      advance();
+    }
+
+    function detach() {
+      window.removeEventListener("wheel", nudge);
+      window.removeEventListener("touchstart", nudge);
+      window.removeEventListener("keydown", nudge);
+      intro.removeEventListener("click", onClick);
+    }
+
+    function onClick(e) {
+      if (e.target.closest("[data-intro-skip]")) { finish(); return; }
+      nudge();
+    }
+
+    window.addEventListener("wheel", nudge, { passive: true });
+    window.addEventListener("touchstart", nudge, { passive: true });
+    window.addEventListener("keydown", nudge);
+    intro.addEventListener("click", onClick);
+
+    advance();
+  }
+
+  /* ----------------------------------------------------------------------
+     11. Footer year
      ---------------------------------------------------------------------- */
   var year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();

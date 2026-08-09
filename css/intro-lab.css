@@ -1,0 +1,451 @@
+/* ==========================================================================
+   INTRO LAB — six candidate intro sequences
+   Loads after stylesheet.css and reuses its tokens.
+
+   Every variant lives inside a .stage, which is a size container. All
+   dimensions are percentages or cq units, so the same markup plays at
+   card size and full screen with no changes.
+   ========================================================================== */
+
+/* ---------- Lab chrome ---------- */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  gap: 26px;
+  padding-bottom: clamp(64px, 11vh, 128px);
+}
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ghost);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), transform 0.5s var(--ease);
+}
+.lab-card:hover { border-color: rgba(255, 195, 41, 0.35); transform: translateY(-4px); }
+.lab-head { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px 16px; }
+.lab-no {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--outline);
+  padding-top: 4px;
+}
+.lab-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.18rem; letter-spacing: -0.02em; }
+.lab-head p { font-size: 14.5px; color: var(--on-surface-dim); margin-top: 6px; max-width: 46ch; }
+.lab-tag {
+  margin-left: auto;
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+  border: 1px solid var(--ghost);
+  border-radius: var(--radius-pill);
+  padding: 5px 11px;
+  white-space: nowrap;
+}
+.lab-controls { display: flex; gap: 9px; padding: 16px 24px 20px; }
+.lab-btn {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ghost);
+  color: var(--on-surface-dim);
+  transition: background 0.3s var(--ease), color 0.3s, border-color 0.3s;
+}
+.lab-btn:hover { background: rgba(255, 255, 255, 0.07); color: var(--on-surface); border-color: var(--outline); }
+.lab-btn--go { color: var(--amber); border-color: rgba(255, 195, 41, 0.35); }
+.lab-btn--go:hover { background: rgba(255, 195, 41, 0.12); color: var(--amber); border-color: var(--amber); }
+
+/* ---------- The stage ---------- */
+.stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--surface-lowest);
+  container-type: size;
+  border-block: 1px solid var(--ghost);
+}
+.stage > * { position: absolute; }
+
+/* ---------- Full-screen player ---------- */
+.player { position: fixed; inset: 0; z-index: 180; background: var(--surface-lowest); display: none; }
+.player.is-open { display: block; }
+.player-holder { position: absolute; inset: 0; }
+.player-holder .stage { width: 100%; height: 100%; aspect-ratio: auto; border: 0; }
+.player-bar {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px 24px;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+.player-bar.is-shown { opacity: 1; }
+.player-name {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  mix-blend-mode: difference;
+}
+.player-actions { display: flex; gap: 9px; }
+.player .lab-btn { background: rgba(10, 15, 16, 0.55); backdrop-filter: blur(12px); color: var(--paper); }
+
+/* ==========================================================================
+   Shared helpers
+   ========================================================================== */
+.disc { top: 50%; left: 50%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; }
+.word {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 11cqw;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--paper);
+  opacity: 0;
+}
+@keyframes labDisc { to { scale: 1; } }
+@keyframes labWord {
+  0%   { opacity: 0; transform: translateY(0.28em); }
+  20%  { opacity: 1; transform: none; }
+  80%  { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateY(-0.18em); }
+}
+@keyframes labWordHold {
+  0%   { opacity: 0; transform: translateY(0.28em); }
+  22%  { opacity: 1; transform: none; }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   01 — BEATS  (the current homepage intro)
+   ========================================================================== */
+.v1 { background: var(--indigo); }
+.v1 .disc { width: 210%; scale: 0; }
+.v1-a { background: var(--amber); }
+.v1-b { background: var(--surface); }
+.v1.is-running .v1-a { animation: labDisc 1s var(--ease-warp) 1.1s forwards; }
+.v1.is-running .v1-b { animation: labDisc 1s var(--ease-warp) 2.2s forwards; }
+.v1-w2 { color: var(--surface); }
+.v1.is-running .v1-w1 { animation: labWord 1.15s var(--ease) 0s both; }
+.v1.is-running .v1-w2 { animation: labWord 1.15s var(--ease) 1.15s both; }
+.v1.is-running .v1-w3 { animation: labWordHold 1.2s var(--ease) 2.35s both; }
+
+/* ==========================================================================
+   02 — ECLIPSE  (no words)
+   Amber sun and ink moon converge, leave a corona, then the light floods out.
+   ========================================================================== */
+.v2 { background: var(--surface); }
+.v2-sun, .v2-moon { width: 44%; }
+.v2-sun { background: var(--amber); }
+.v2-moon { background: var(--surface-lowest); }
+.v2-ring {
+  width: 45%;
+  border: 0.45cqw solid var(--amber);
+  background: none;
+  opacity: 0;
+  box-shadow: 0 0 6cqw rgba(255, 195, 41, 0.45);
+}
+.v2-flash { width: 12%; background: var(--amber); scale: 0; }
+
+.v2.is-running .v2-sun  { animation: v2sun 4.2s var(--ease-orbit) both; }
+.v2.is-running .v2-moon { animation: v2moon 4.2s var(--ease-orbit) both; }
+.v2.is-running .v2-ring { animation: v2ring 4.2s var(--ease) both; }
+.v2.is-running .v2-flash { animation: v2flash 4.2s var(--ease-warp) both; }
+
+@keyframes v2sun {
+  0%   { transform: translateX(-78cqw) scale(0.55); opacity: 0; }
+  18%  { opacity: 1; }
+  46%  { transform: translateX(0) scale(1); }
+  100% { transform: translateX(0) scale(1); }
+}
+@keyframes v2moon {
+  0%   { transform: translateX(82cqw) scale(0.55); opacity: 0; }
+  18%  { opacity: 1; }
+  50%  { transform: translateX(1.4cqw) scale(0.965); }
+  74%  { transform: translateX(1.4cqw) scale(0.965); }
+  100% { transform: translateX(1.4cqw) scale(0.965); }
+}
+@keyframes v2ring {
+  0%, 48% { opacity: 0; transform: scale(1); }
+  58%     { opacity: 1; transform: scale(1); }
+  74%     { opacity: 1; transform: scale(1.03); }
+  90%     { opacity: 0.5; transform: scale(4); }
+  100%    { opacity: 0; transform: scale(9); }
+}
+@keyframes v2flash {
+  0%, 76% { scale: 0; }
+  100%    { scale: 26; }
+}
+
+/* ==========================================================================
+   03 — BIG BANG  (no words)
+   Everything fires out from a core, holds, then collapses back and floods.
+   ========================================================================== */
+.v3 { background: var(--surface); }
+.v3-core { width: 2.4%; background: var(--amber); scale: 0; }
+.v3-ray {
+  top: 50%; left: 50%;
+  width: 42cqmin;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 195, 41, 0.55), transparent);
+  transform-origin: 0 50%;
+  rotate: var(--a);
+  scale: 0 1;
+}
+.v3-planet {
+  top: 50%; left: 50%;
+  width: var(--s);
+  aspect-ratio: 1;
+  margin: calc(var(--s) / -2);
+  border-radius: 50%;
+  background: var(--c);
+  transform: translate(0, 0) scale(0);
+}
+.v3-wipe { width: 10%; background: var(--indigo); scale: 0; }
+
+.v3.is-running .v3-core   { animation: v3core 4s var(--ease) both; }
+.v3.is-running .v3-ray    { animation: v3ray 4s var(--ease-orbit) calc(var(--d)) both; }
+.v3.is-running .v3-planet { animation: v3fly 4s var(--ease-orbit) calc(var(--d)) both; }
+.v3.is-running .v3-wipe   { animation: v3wipe 4s var(--ease-warp) both; }
+
+@keyframes v3core {
+  0% { scale: 0; } 8% { scale: 1.8; } 16% { scale: 1; }
+  72% { scale: 1; } 84% { scale: 2.4; } 100% { scale: 0; }
+}
+@keyframes v3ray { 0% { scale: 0 1; } 26% { scale: 1 1; } 66% { scale: 1 1; } 88% { scale: 0 1; } 100% { scale: 0 1; } }
+@keyframes v3fly {
+  0%   { transform: translate(0, 0) scale(0); }
+  38%  { transform: translate(var(--x), var(--y)) scale(1); }
+  64%  { transform: translate(var(--x), var(--y)) scale(1); }
+  88%  { transform: translate(0, 0) scale(0); }
+  100% { transform: translate(0, 0) scale(0); }
+}
+@keyframes v3wipe { 0%, 84% { scale: 0; } 100% { scale: 26; } }
+
+/* ==========================================================================
+   04 — COUNTER  (numerals only)
+   A loading count with the field flipping underneath it.
+   ========================================================================== */
+@property --v4n { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
+.v4 { background: var(--surface); }
+.v4-field { inset: 0; clip-path: inset(100% 0 0 0); }
+.v4-f2 { background: var(--amber); }
+.v4-f3 { background: var(--indigo); }
+.v4-num {
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 30cqw;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--paper);
+  counter-reset: v4 var(--v4n);
+}
+.v4-num::after { content: counter(v4); }
+.v4-bar { left: 12%; right: 12%; bottom: 16%; height: 1px; background: rgba(255, 255, 255, 0.16); }
+.v4-bar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--amber); display: block; }
+.v4-label {
+  left: 12%; bottom: 20%;
+  font-family: var(--font-mono);
+  font-size: 2.4cqw;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--outline);
+  opacity: 0;
+}
+.v4-wipe { top: 50%; left: 50%; width: 12%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--surface); scale: 0; }
+
+.v4.is-running .v4-num   { animation: v4count 2.7s cubic-bezier(0.2, 0.75, 0.2, 1) both, v4tint 3.8s steps(1) both; }
+.v4.is-running .v4-f2    { animation: v4field 3.8s var(--ease-warp) both; animation-delay: 0.95s; }
+.v4.is-running .v4-f3    { animation: v4field 3.8s var(--ease-warp) both; animation-delay: 1.95s; }
+.v4.is-running .v4-bar   { animation: v4track 3.8s steps(1) both; }
+.v4.is-running .v4-bar i { animation: v4bar 2.7s cubic-bezier(0.2, 0.75, 0.2, 1) both, v4barTint 3.8s steps(1) both; }
+.v4.is-running .v4-label { animation: v4label 3.8s var(--ease) both, v4labelTint 3.8s steps(1) both; }
+.v4.is-running .v4-wipe  { animation: v4wipe 3.8s var(--ease-warp) both; }
+
+@keyframes v4count { from { --v4n: 0; } to { --v4n: 100; } }
+@keyframes v4tint  { 0% { color: var(--paper); } 27% { color: var(--surface); } 53% { color: var(--paper); } }
+@keyframes v4field { 0% { clip-path: inset(100% 0 0 0); } 22% { clip-path: inset(0 0 0 0); } 100% { clip-path: inset(0 0 0 0); } }
+@keyframes v4bar   { to { width: 100%; } }
+@keyframes v4label { 0% { opacity: 0; } 10% { opacity: 1; } 68% { opacity: 1; } 78% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes v4labelTint { 0% { color: var(--outline); } 27% { color: rgba(16, 20, 21, 0.6); } 53% { color: rgba(255, 255, 255, 0.6); } }
+@keyframes v4barTint   { 0% { background: var(--amber); } 27% { background: var(--surface); } 53% { background: var(--paper); } }
+@keyframes v4track     { 0% { background: rgba(255, 255, 255, 0.16); } 27% { background: rgba(16, 20, 21, 0.22); } 53% { background: rgba(255, 255, 255, 0.22); } }
+@keyframes v4wipe  { 0%, 76% { scale: 0; } 100% { scale: 26; } }
+
+/* ==========================================================================
+   05 — SLATS
+   Vertical columns sweep through in two passes, the name lands in the gap.
+   ========================================================================== */
+.v5 { background: var(--surface); }
+.v5-col {
+  top: -1px; bottom: -1px;
+  left: calc(var(--i) * 16.6667%);
+  width: calc(16.6667% + 1px);
+  background: var(--indigo);
+  transform: translateY(-101%);
+}
+.v5-col--b { background: var(--amber); transform: translateY(101%); }
+.v5-word { color: var(--paper); font-size: 9.5cqw; }
+.v5-rule { left: 12%; right: 12%; top: 50%; height: 1px; background: var(--amber); scale: 0 1; transform-origin: 0 50%; }
+
+.v5.is-running .v5-col--a { animation: v5down 2.05s var(--ease-warp) calc(var(--i) * 0.06s) both; }
+.v5.is-running .v5-col--b { animation: v5up 2.05s var(--ease-warp) calc(1.05s + var(--i) * 0.06s) both; }
+.v5.is-running .v5-word   { animation: labWordHold 1.4s var(--ease) 3.15s both; }
+.v5.is-running .v5-rule   { animation: v5rule 1.4s var(--ease-orbit) 3.25s both; }
+
+@keyframes v5down { 0% { transform: translateY(-101%); } 34% { transform: translateY(0); } 62% { transform: translateY(0); } 100% { transform: translateY(101%); } }
+@keyframes v5up   { 0% { transform: translateY(101%); } 34% { transform: translateY(0); } 62% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+@keyframes v5rule { to { scale: 1 1; } }
+
+/* ==========================================================================
+   06 — ORBIT LOCK  (no words)
+   Rings draw themselves, planets snap on, the system aligns and flies past.
+   ========================================================================== */
+.v6 { background: var(--surface); }
+.v6-system { inset: 0; transform-origin: 50% 50%; }
+.v6-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: rotate(-90deg); }
+.v6-rings circle {
+  fill: none;
+  fill: none;
+  stroke: rgba(249, 249, 255, 0.34);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.v6-planet {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: var(--s);
+  aspect-ratio: 1;
+  margin: calc(var(--s) / -2);
+  border-radius: 50%;
+  background: var(--c);
+  transform: translate(var(--x), var(--y)) scale(0);
+}
+.v6-wipe { top: 50%; left: 50%; width: 12%; aspect-ratio: 1; border-radius: 50%; translate: -50% -50%; background: var(--amber); scale: 0; }
+
+.v6.is-running .v6-system { animation: v6system 4.4s var(--ease-orbit) both; }
+.v6-ring--lit { stroke: rgba(255, 195, 41, 0.5) !important; }
+.v6.is-running .v6-rings circle { animation: v6draw 1.5s var(--ease-orbit) calc(var(--d)) both; }
+.v6.is-running .v6-planet { animation: v6snap 1s var(--ease-orbit) calc(var(--d)) both; }
+.v6.is-running .v6-wipe { animation: v6wipe 4.4s var(--ease-warp) both; }
+
+@keyframes v6draw   { to { stroke-dashoffset: 0; } }
+@keyframes v6snap   { 0% { transform: translate(var(--x), var(--y)) scale(0); } 65% { transform: translate(var(--x), var(--y)) scale(1.25); } 100% { transform: translate(var(--x), var(--y)) scale(1); } }
+@keyframes v6system {
+  0%   { transform: rotate(-22deg) scale(0.72); opacity: 0; }
+  12%  { opacity: 1; }
+  38%  { transform: rotate(0deg) scale(1); }
+  72%  { transform: rotate(9deg) scale(1.05); }
+  86%  { opacity: 1; }
+  100% { transform: rotate(26deg) scale(6.5); opacity: 0; }
+}
+@keyframes v6wipe { 0%, 82% { scale: 0; } 100% { scale: 26; } }
+
+/* ==========================================================================
+   Responsive + reduced motion
+   ========================================================================== */
+@media (max-width: 620px) {
+  .lab-grid { grid-template-columns: 1fr; }
+  .lab-head { flex-wrap: wrap; }
+  .lab-tag { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The lab is the one place motion is the subject, so previews still run —
+     but only when the visitor asks for them. Nothing autoplays. */
+  .stage * { animation-duration: inherit; }
+}
+
+/* ==========================================================================
+   03 — ECLIPSE TRANSIT
+   The moon crosses the full width. A loading counter sits underneath it, drawn
+   twice: a dark layer on the amber field, and a light layer clipped to the
+   moon's exact circle. The clip and the moon share identical keyframe values
+   and both run linear, so they can never drift apart.
+   ========================================================================== */
+@property --v7n { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
+.v7 { background: var(--amber); }
+.v7-moon { width: 54cqmin; background: var(--surface); }
+
+.v7-layer { inset: 0; }
+.v7-base { color: var(--surface); }
+.v7-lit  { color: var(--amber); clip-path: circle(27cqmin at -28% 50%); }
+
+.v7-num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 34cqmin;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: inherit;
+  counter-reset: v7 var(--v7n);
+}
+.v7-num::after { content: counter(v7); }
+.v7-label {
+  position: absolute;
+  left: 0; right: 0; bottom: 27%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 2.2cqmin;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0;
+}
+.v7-bar { position: absolute; left: 32%; right: 32%; bottom: 22%; height: 1px; }
+.v7-bar i { position: absolute; inset: 0 auto 0 0; width: 0; display: block; }
+.v7-base .v7-bar   { background: rgba(16, 20, 21, 0.25); }
+.v7-base .v7-bar i { background: var(--surface); }
+.v7-lit .v7-bar    { background: rgba(255, 195, 41, 0.28); }
+.v7-lit .v7-bar i  { background: var(--amber); }
+
+.v7-wipe { width: 12cqmin; background: var(--surface); scale: 0; }
+
+.v7.is-running .v7-moon   { animation: v7moon 5s linear both; }
+.v7.is-running .v7-lit    { animation: v7clip 5s linear both; }
+.v7.is-running .v7-num    { animation: v7count 4s linear 0.2s both; }
+.v7.is-running .v7-bar i  { animation: v7fill 4s linear 0.2s both; }
+.v7.is-running .v7-label  { animation: v7label 5s var(--ease) both; }
+.v7.is-running .v7-wipe   { animation: v7wipe 5s var(--ease-warp) both; }
+
+/* moon centre: 50% + translateX. -78cqw puts it at -28%, +78cqw at 128% —
+   the same two numbers the clip-path uses. */
+@keyframes v7moon {
+  0%, 4%    { transform: translateX(-78cqw); }
+  84%, 100% { transform: translateX(78cqw); }
+}
+@keyframes v7clip {
+  0%, 4%    { clip-path: circle(27cqmin at -28% 50%); }
+  84%, 100% { clip-path: circle(27cqmin at 128% 50%); }
+}
+@keyframes v7count { from { --v7n: 0; } to { --v7n: 100; } }
+@keyframes v7fill  { to { width: 100%; } }
+@keyframes v7label { 0% { opacity: 0; } 8% { opacity: 1; } 76% { opacity: 1; } 84% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes v7wipe  { 0%, 86% { scale: 0; } 100% { scale: 30; } }

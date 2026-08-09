@@ -74,6 +74,101 @@ paired planet (`data-planet`) and dims the rest of the system.
 
 Escape closes it, Tab is trapped inside it, and body scroll locks while open.
 
+## Intro sequence
+
+The homepage opens with a three-beat introduction, mirroring the reference's
+numbered intro:
+
+| Beat | Field | Word |
+| --- | --- | --- |
+| 01 | Indigo | Design |
+| 02 | Amber | Engineering |
+| 03 | Ink, with orbit rings and planets converging | Josh Serpis |
+
+Each beat arrives as a disc scaling up to fill the frame — the same circular
+wipe the reference uses between slides. A mono `01 / 03` counter sits bottom
+left and a **Skip intro** control bottom right.
+
+It auto-advances at 1.15s per beat, but scroll, click, tap or an arrow key
+jumps ahead immediately, so it's interactive rather than something to sit
+through. Total run time is about 3.5 seconds if untouched.
+
+**It stays out of the way.** An inline script in `<head>` arms it before first
+paint, and only when all three are true: no `jsx-intro` flag in sessionStorage,
+reduced motion off, and no same-origin referrer — so it plays on genuine first
+arrival, not every time someone navigates back to the homepage. No JS, or
+reduced motion, and the markup never renders at all.
+
+## Intro lab — `intro-lab.html`
+
+A scratch page (noindex, not linked from the site) holding six candidate intro
+sequences side by side. Each card previews live; **Play full screen** is the
+only honest way to judge one.
+
+| # | Name | Words? | Idea |
+| --- | --- | --- | --- |
+| 01 | Beats | Words | The current homepage intro — three flat fields, disc wipes |
+| 02 | Eclipse | None | Amber sun and ink moon converge, corona flares, light floods out |
+| 03 | Eclipse Transit | Numerals | The moon crosses the full frame over a loading count, flipping it to amber |
+| 04 | Big Bang | None | Core pulses, rays fire, planets travel out then collapse back |
+| 05 | Counter | Numerals | 0→100 count with the colour field flipping underneath |
+| 06 | Slats | Words | Six columns sweep down then up, the name lands in the gap |
+| 07 | Orbit Lock | None | Rings draw themselves, planets snap on, the system flies past |
+
+**03 Eclipse Transit** is the one worth understanding. The counter is drawn
+twice — a dark layer on the amber field and a light layer clipped to
+`circle(27cqmin at X 50%)`. The clip and the moon's `translateX` use the same
+two numbers (`-28%` / `128%`) and both run `linear`, so they can't drift apart
+at any duration or viewport. The count shares the transit's exact time window,
+also linear, so it reads **50 at the instant of totality**.
+
+Every variant lives inside a `.stage`, which is a **size container**. All
+dimensions are percentages or `cq` units, so the identical markup plays at card
+size and full screen with nothing to change. The counter uses `@property` with
+an `<integer>` syntax so the count is pure CSS — no JS ticking a number.
+
+Files: `intro-lab.html`, `css/intro-lab.css`, `js/intro-lab.js`. All three are
+self-contained — delete them once a direction is picked and nothing else breaks.
+
+## Scroll-linked shapes
+
+The hero planets keep working as you scroll. A single rAF-throttled handler
+writes two custom properties on the orbit field — `--sy` (raw scroll) and
+`--sp` (0→1 through the hero) — and each orb scales them with its own
+personality:
+
+```html
+--driftX / --driftY   how far and which way it travels
+--grow                how much it swells (0.55 → 2.4)
+--spin                how far it rotates (-40deg → 90deg)
+--morph               circle → squircle (30% → 42%)
+```
+
+Because the entrance keyframe references those properties, one
+forwards-filling animation keeps responding to scroll — no need to fight the
+animation for control of `transform`. The CTA discs morph on their own
+`--cp` progress as the section arrives.
+
+## The universe menu is navigable from both ends
+
+The four keyed planets are `<a>` elements, not decoration:
+
+- Hovering a **menu item** lights its planet and dims the rest of the system.
+- Hovering a **planet** lights it, shows a mono label, and flips its menu item
+  to the per-letter colour wave while the other items drop to 40%.
+- **Clicking a planet** navigates to that page, through the warp transition.
+
+Both directions call the same `focusKey()` / `clearKey()` pair, so the two
+entry points can't drift out of sync. The planets carry `tabindex="-1"` and
+`aria-hidden` — they duplicate the menu links, so they shouldn't be second tab
+stops.
+
+One thing that needed fixing: `.universe-inner` spans the whole overlay, so it
+was an invisible shield over every planet. It's now `pointer-events: none`,
+with only `.u-link`, `.u-mail` and `.u-social a` opting back in. The first
+attempt gave the whole `.u-meta` strip pointer events, which still blocked the
+lower planets — worth knowing if more content lands in the overlay later.
+
 ## Page transitions
 
 Two halves, deliberately decoupled:
@@ -119,25 +214,79 @@ With JS off, links just navigate normally.
   ground. Menu links keep their accessible names despite being split into
   per-letter spans.
 
-## Structure (unchanged)
+## Content
+
+Copy across the homepage and About page now reflects AI and full-stack
+engineering rather than the 2017–21 design era:
+
+- **Hero** — "AI engineer building agent systems, evaluation pipelines, and
+  the full-stack products that wrap around them." Role strip reads
+  *AI Engineer · Full-Stack · South West England*.
+- **Section 02** — "Demos are easy. Production isn't." on the evaluation /
+  pipeline / interface chain.
+- **Capabilities** — AI engineering, Full-stack product, Platform & developer
+  experience. Each ends on a mono stack line instead of a case-study link,
+  since none of the existing case studies match these.
+- **About** — five years at CapPlan (three in AI, recently promoted onto
+  full-stack), freelance alongside throughout, and the PHP → UX/UI → AI arc
+  that frames the older case studies as history rather than as the offer.
+  Adds a Toolkit chip row.
+- **CTA** — freelance and *founding* opportunities, now pointing at the
+  contact page rather than a bare mailto.
+
+### Contact page (new)
+
+Matches the Orbit language: orbit field, kinetic heading, sticky aside with
+an availability pill, direct email, response time and socials.
+
+Inputs follow the Stitch spec — surface fill, bottom-only 2px rule, JetBrains
+Mono label that lifts and shrinks on focus, border animating to periwinkle.
+The topic picker is radio buttons styled as chips.
+
+**The form needs an endpoint before it works.** GitHub Pages can't process a
+POST, so `action` is set to `https://formspree.io/f/YOUR_FORM_ID` — create a
+free Formspree form and paste the real ID in. Until then the JS intercepts
+submission and tells the visitor to email directly rather than silently
+swallowing the message. With JS off it degrades to a normal form POST.
+
+## Structure
 
 ```
-index.html  about.html  work.html
+index.html  about.html  work.html  contact.html
 css/stylesheet.css      (rewritten — 1,278 lines)
 js/script.js            (rewritten — 334 lines, no dependencies)
 portfolio/*.html        (8 pages regenerated; copy untouched)
 images/                 (untouched)
 ```
 
-## Bug fixed along the way
+## Bugs fixed along the way
 
 The scroll-reveal observer used `threshold: 0.15`. Project screenshots run to
 5,800px tall — taller than six viewports — so 15% of them could never be
 visible at once and **they never revealed**. Now `threshold: 0` with a
 `-12%` bottom root margin, which works at any element height.
 
+The contact form's visually-hidden radio inputs were `position: absolute`
+with no containing block, so all three stacked in one spot and intercepted
+clicks aimed at other elements. They're now clipped and `pointer-events: none`
+— the labels do the toggling, and keyboard focus still reaches them.
+
+Skipping the intro early left a blank page: `main`'s entrance is delayed to
+3.35s to sync with the intro clearing, so a skip at 0.5s meant staring at
+nothing for three seconds. Finishing now drops the delay and restarts the
+animation through `getAnimations()`, so the hero rises properly whenever the
+intro ends.
+
 ## Still outstanding
 
+- **The Work page is the weak link.** All eight case studies are 2017–21
+  design work. The copy now frames that as history, but one recent AI or
+  full-stack case study would do more for positioning than any amount of
+  wording.
+- **Check these three** — they came through a voice note and I guessed:
+  CapPlan's spelling, "Claude Code" (heard as "floor code"), and *founding*
+  opportunities (heard as "found"). Also verify "Microsoft Agent Framework"
+  is the name you want on the Azure agent work.
 - Somerset Bees and Zero Limitations still have no project screenshots.
 - `bin-sensor`, `rpcs3` and `strength-analysed` remain unbuilt stubs. The
   `rpcs3-*.png` images are sitting unused in `images/` if you want to revive

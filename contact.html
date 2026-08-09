@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Josh Serpis — designer-developer working across UX, UI and front-end development.">
+  <meta name="description" content="Get in touch with Josh Serpis — AI and full-stack engineering, freelance work and founding opportunities.">
   <meta name="theme-color" content="#101415">
-  <title>About — Josh Serpis</title>
+  <title>Contact — Josh Serpis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -22,9 +22,9 @@
       <a class="brand" href="index.html">Josh<span>.</span>Serpis<small>AI / Full-Stack Engineer</small></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="work.html">Work</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-expanded="false" aria-controls="universe" aria-label="Open menu">
         <i></i><i></i><i></i>
@@ -104,72 +104,71 @@
         <span class="orb" style="--s:14px; --t:78%; --l:88%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
       </div>
       <div class="container">
-        <p class="eyebrow">About me</p>
+        <p class="eyebrow">Contact</p>
         <h1>
-          <span class="rise-line"><span>AI engineer with</span></span>
-          <span class="rise-line"><span style="--d:.1s">a designer's eye.</span></span>
+          <span class="rise-line"><span>Tell me what</span></span>
+          <span class="rise-line"><span style="--d:.1s">you're building.</span></span>
         </h1>
-        <p class="lede sweep" style="--d:.3s">Five years at CapPlan, three of them building AI systems, plus freelance work alongside the whole way through.</p>
+        <p class="lede sweep" style="--d:.3s">Freelance AI and full-stack work, founding conversations, or a question about something on this site — all welcome.</p>
       </div>
     </header>
 
-    <div class="container about-grid">
-      <div class="about-photo reveal">
-        <img src="images/portrait-2.jpg" alt="Portrait of Josh Serpis">
-      </div>
-      <div class="about-copy reveal" style="--d:.12s">
-        <h2>The short version</h2>
-        <p>I'm an AI engineer at CapPlan, where I've been for five years — the last three focused on AI, and recently promoted onto full-stack. Day to day that means agent frameworks, evaluation harnesses that catch regressions before users do, Azure ML and DevOps pipelines, and the internal scaffolding a team runs on: documentation, shared commands, Claude Code workflows.</p>
-        <p>I've freelanced alongside that for the same five years, mostly AI and full-stack applications — agent systems, integrations, and the products built around them.</p>
-        <p>I got my start in PHP, then spent my early career in UX, UI and front-end work. The case studies on this site are from that era: an NHS pre-surgery app, esports platforms, a run of client sites. It's why I still care what an interface feels like, not just whether the endpoint returns a 200 — and it's the part of my background clients tend to notice first.</p>
-        <p>Outside work I'm usually breaking my own side projects on GitHub.</p>
+    <div class="container contact-grid">
+      <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-contact-form>
+        <div class="field">
+          <input type="text" id="cf-name" name="name" placeholder=" " autocomplete="name" required>
+          <label for="cf-name">Your name</label>
+        </div>
+        <div class="field">
+          <input type="email" id="cf-email" name="email" placeholder=" " autocomplete="email" required>
+          <label for="cf-email">Email</label>
+        </div>
 
-        <ul class="fact-list">
-          <li><b>Currently</b><span>AI &amp; full-stack engineer, CapPlan</span></li>
-          <li><b>Experience</b><span>5 years engineering · 3 in AI</span></li>
-          <li><b>Freelance</b><span>Available alongside — AI &amp; full-stack</span></li>
-          <li><b>Based in</b><span>South West England / remote</span></li>
-          <li><b>Education</b><span>BA Digital Media</span></li>
-        </ul>
+        <fieldset class="field-group">
+          <legend>What's this about?</legend>
+          <div class="pick-row">
+            <input type="radio" id="cf-t1" name="topic" value="Freelance project" checked>
+            <label for="cf-t1">Freelance project</label>
+            <input type="radio" id="cf-t2" name="topic" value="Founding opportunity">
+            <label for="cf-t2">Founding opportunity</label>
+            <input type="radio" id="cf-t3" name="topic" value="Something else">
+            <label for="cf-t3">Something else</label>
+          </div>
+        </fieldset>
 
-        <div class="toolkit">
-          <h4>Toolkit</h4>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">.NET</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">Next.js</span>
-            <span class="chip">React</span>
-            <span class="chip">Node</span>
-            <span class="chip amber">Microsoft Agent Framework</span>
-            <span class="chip amber">Azure AI</span>
-            <span class="chip amber">Azure ML</span>
-            <span class="chip amber">Azure DevOps</span>
-            <span class="chip">Claude Code</span>
-            <span class="chip">PHP</span>
+        <div class="field">
+          <textarea id="cf-message" name="message" placeholder=" " required></textarea>
+          <label for="cf-message">What are you working on?</label>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Send it <span class="arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="contact-aside reveal" style="--d:.12s">
+        <span class="status-pill"><i aria-hidden="true"></i>Available</span>
+        <div>
+          <h4>Prefer email?</h4>
+          <a class="u-mail" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com</a>
+        </div>
+        <div>
+          <h4>Response time</h4>
+          <p>Within a day, usually the same evening.</p>
+        </div>
+        <div>
+          <h4>Based in</h4>
+          <p>South West England — working with clients anywhere.</p>
+        </div>
+        <div>
+          <h4>Elsewhere</h4>
+          <div class="u-social">
+            <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
+            <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
+            <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
           </div>
         </div>
-
-        <div class="hero-actions" style="margin-top:20px">
-          <a class="btn btn-primary" href="work.html">See my work <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          <a class="btn btn-ghost" href="contact.html">Get in touch</a>
-        </div>
-      </div>
+      </aside>
     </div>
-
-    <section class="big-cta grain" data-lit>
-      <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
-      <span class="cta-orb cta-orb--a" aria-hidden="true"></span>
-      <div class="container">
-        <p class="eyebrow">Got a project in mind?</p>
-        <h2>
-          <span class="rise-line"><span>Let's build</span></span>
-          <span class="rise-line"><span style="--d:.1s">something together.</span></span>
-        </h2>
-        <p>I take on freelance AI and full-stack work alongside my day job, and I'm open to founding opportunities. Tell me what you're building and I'll come back to you within a day.</p>
-        <a class="btn btn-light" href="contact.html">Start a conversation <span class="arrow" aria-hidden="true">&rarr;</span></a>
-      </div>
-    </section>
 
   </main>
 
