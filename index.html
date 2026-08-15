@@ -28,37 +28,27 @@
 
   <!-- ============================ INTRO ============================ -->
   <div class="intro">
-    <span class="intro-disc intro-disc--a" aria-hidden="true"></span>
-    <span class="intro-disc intro-disc--b" aria-hidden="true"></span>
+    <span class="intro-system" aria-hidden="true">
+      <span class="intro-ring" style="--r:20vmin; --d:0.15s"></span>
+      <span class="intro-ring intro-ring--lit" style="--r:32vmin; --d:0.31s"></span>
+      <span class="intro-ring" style="--r:44vmin; --d:0.47s"></span>
+      <span class="intro-ring" style="--r:56vmin; --d:0.63s"></span>
+    <span class="intro-orb" style="--s:4.5vmin; --c:var(--amber); --x:16.4vmin; --y:-11.5vmin; --d:0.50s"></span>
+    <span class="intro-orb" style="--s:2.2vmin; --c:var(--paper); --x:-16.4vmin; --y:11.5vmin; --d:0.64s"></span>
+    <span class="intro-orb" style="--s:6.0vmin; --c:var(--indigo-lift); --x:29.7vmin; --y:12.0vmin; --d:0.78s"></span>
+    <span class="intro-orb" style="--s:3.0vmin; --c:var(--amethyst); --x:-27.7vmin; --y:-16.0vmin; --d:0.92s"></span>
+    <span class="intro-orb" style="--s:4.4vmin; --c:var(--amber-deep); --x:18.6vmin; --y:39.9vmin; --d:1.06s"></span>
+    <span class="intro-orb" style="--s:2.4vmin; --c:var(--indigo); --x:-13.6vmin; --y:-41.8vmin; --d:1.20s"></span>
+    </span>
 
-    <svg class="intro-rings" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
-      <ellipse cx="500" cy="500" rx="200" ry="134"/>
-      <ellipse cx="500" cy="500" rx="320" ry="214"/>
-      <ellipse cx="500" cy="500" rx="440" ry="296"/>
-    </svg>
-
-    <span class="intro-orb" aria-hidden="true" style="--s:clamp(70px,9vw,130px); --x:-30vw; --y:-18vh; --c:var(--amber);       --d:.05s"></span>
-    <span class="intro-orb" aria-hidden="true" style="--s:clamp(48px,6vw,86px);  --x:32vw;  --y:22vh;  --c:var(--indigo);      --d:.12s"></span>
-    <span class="intro-orb" aria-hidden="true" style="--s:44px; --x:26vw;  --y:-26vh; --c:var(--indigo-lift); --d:.19s"></span>
-    <span class="intro-orb" aria-hidden="true" style="--s:26px; --x:-36vw; --y:26vh;  --c:var(--amethyst);    --d:.26s"></span>
-    <span class="intro-orb" aria-hidden="true" style="--s:14px; --x:14vw;  --y:-33vh; --c:var(--paper);       --d:.33s"></span>
-    <span class="intro-orb" aria-hidden="true" style="--s:18px; --x:-16vw; --y:32vh;  --c:var(--amber-deep);  --d:.4s"></span>
-
-    <div class="intro-words" aria-hidden="true">
-      <span class="intro-word" data-beat="1">Design</span>
-      <span class="intro-word" data-beat="2">Engineering</span>
-      <span class="intro-word" data-beat="3">Josh Serpis</span>
-    </div>
+    <span class="intro-count" aria-hidden="true"></span>
+    <span class="intro-wipe" aria-hidden="true"></span>
 
     <div class="intro-hud">
-      <span class="intro-count" aria-hidden="true"><b data-intro-step>01</b> <span>/ 03</span></span>
+      <span class="intro-mark" aria-hidden="true">Josh Serpis</span>
       <button class="intro-skip" type="button" data-intro-skip>Skip intro <i aria-hidden="true"></i></button>
     </div>
   </div>
-
-  <!-- page transition surfaces -->
-  <div class="warp-in" aria-hidden="true"></div>
-  <div class="warp-out" aria-hidden="true"></div>
 
   <nav class="site-nav" aria-label="Main">
     <div class="container">

@@ -419,75 +419,56 @@
 
 
   /* ----------------------------------------------------------------------
-     10. Intro sequence
-     Three beats, auto-advancing but skippable, and interruptible by scroll,
-     click or key. Only armed once per session by the inline head script.
+     10. Intro sequence — "Orbit Lock"
+     One continuous run rather than discrete beats, so any input (scroll,
+     tap, key, click, or the skip control) simply ends it. Only armed on a
+     genuine first arrival by the inline head script.
      ---------------------------------------------------------------------- */
   var intro = document.querySelector(".intro");
   if (intro && document.documentElement.classList.contains("intro-armed")) {
-    var BEATS = 3;
-    var HOLD = 1150;          /* ms per beat  */
-    var step = 0;
-    var stepEl = intro.querySelector("[data-intro-step]");
-    var timer = null;
-    var finished = false;
+    var RUN = 4600;                 /* must match the CSS animation length */
+    var introTimer = null;
+    var introDone = false;
 
-    function paint() {
-      for (var i = 1; i <= BEATS; i++) intro.classList.toggle("is-beat-" + i, i === step);
-      if (stepEl) stepEl.textContent = ("0" + step).slice(-2);
-    }
+    function endIntro() {
+      if (introDone) return;
+      introDone = true;
+      clearTimeout(introTimer);
+      detachIntro();
 
-    function finish() {
-      if (finished) return;
-      finished = true;
-      clearTimeout(timer);
-      detach();
       intro.classList.add("is-done");
       /* keep .intro-armed so main's entrance styles stay; .intro-done releases
          the scroll lock and drops the delay, then we restart the animation so
          the hero always rises — even when the intro was skipped at 0.5s */
       document.documentElement.classList.add("intro-done");
+      try { sessionStorage.setItem("jsx-intro", "1"); } catch (err) { /* private mode */ }
+
       var mainEl = document.querySelector("main");
       if (mainEl && mainEl.getAnimations) {
         mainEl.getAnimations().forEach(function (a) { a.cancel(); a.play(); });
       }
-      try { sessionStorage.setItem("jsx-intro", "1"); } catch (err) { /* private mode */ }
       setTimeout(function () { intro.classList.add("is-gone"); }, 950);
     }
 
-    function advance() {
-      if (finished) return;
-      step++;
-      if (step > BEATS) { finish(); return; }
-      paint();
-      timer = setTimeout(advance, HOLD);
+    function onIntroKey(e) {
+      if (e.key === "Escape" || e.key === "Enter" || e.key === " " ||
+          e.key === "ArrowDown" || e.key === "PageDown") endIntro();
     }
 
-    function nudge(e) {
-      if (e && e.type === "keydown" && e.key !== "Enter" && e.key !== " " &&
-          e.key !== "Escape" && e.key !== "ArrowDown") return;
-      clearTimeout(timer);
-      advance();
+    function detachIntro() {
+      window.removeEventListener("wheel", endIntro);
+      window.removeEventListener("touchstart", endIntro);
+      window.removeEventListener("keydown", onIntroKey);
+      intro.removeEventListener("click", endIntro);
     }
 
-    function detach() {
-      window.removeEventListener("wheel", nudge);
-      window.removeEventListener("touchstart", nudge);
-      window.removeEventListener("keydown", nudge);
-      intro.removeEventListener("click", onClick);
-    }
+    window.addEventListener("wheel", endIntro, { passive: true });
+    window.addEventListener("touchstart", endIntro, { passive: true });
+    window.addEventListener("keydown", onIntroKey);
+    intro.addEventListener("click", endIntro);
 
-    function onClick(e) {
-      if (e.target.closest("[data-intro-skip]")) { finish(); return; }
-      nudge();
-    }
-
-    window.addEventListener("wheel", nudge, { passive: true });
-    window.addEventListener("touchstart", nudge, { passive: true });
-    window.addEventListener("keydown", nudge);
-    intro.addEventListener("click", onClick);
-
-    advance();
+    intro.classList.add("is-running");
+    introTimer = setTimeout(endIntro, RUN);
   }
 
   /* ----------------------------------------------------------------------

@@ -74,30 +74,37 @@ paired planet (`data-planet`) and dims the rest of the system.
 
 Escape closes it, Tab is trapped inside it, and body scroll locks while open.
 
-## Intro sequence
+## Intro sequence — "Orbit Lock"
 
-The homepage opens with a three-beat introduction, mirroring the reference's
-numbered intro:
+The homepage opens with a 4.6s sequence:
 
-| Beat | Field | Word |
-| --- | --- | --- |
-| 01 | Indigo | Design |
-| 02 | Amber | Engineering |
-| 03 | Ink, with orbit rings and planets converging | Josh Serpis |
+1. Four rings draw themselves clockwise from 12 o'clock, 0.16s apart
+2. Six planets snap onto rings 1–3 with a slight overshoot
+3. A loading count runs **0 → 100 at the centre**, reaching 100 just as the
+   system starts to move
+4. The whole system rotates and flies past the camera
+5. An amber disc floods out, then contracts away to reveal the hero
 
-Each beat arrives as a disc scaling up to fill the frame — the same circular
-wipe the reference uses between slides. A mono `01 / 03` counter sits bottom
-left and a **Skip intro** control bottom right.
+A mono wordmark sits bottom left, **Skip intro** bottom right. Any input —
+scroll, tap, click, Esc, Enter, space, arrow — ends it immediately.
 
-It auto-advances at 1.15s per beat, but scroll, click, tap or an arrow key
-jumps ahead immediately, so it's interactive rather than something to sit
-through. Total run time is about 3.5 seconds if untouched.
+**Geometry.** Rings are CSS boxes, not SVG, so they and the planets share one
+unit (`vmin`) from one centre: a planet at `--r` lands exactly on the ring of
+radius `--r` at any viewport. Verified at 1440×900, 1920×1080 and 390×844 —
+ring radii 180/288/396px against planet distances 180.3/288.3/396.2px. The
+ring draw-on is a `conic-gradient` mask sweeping an animated `<angle>` custom
+property, and the counter is an `<integer>` custom property, so both are pure
+CSS with no JS ticking anything.
 
 **It stays out of the way.** An inline script in `<head>` arms it before first
 paint, and only when all three are true: no `jsx-intro` flag in sessionStorage,
 reduced motion off, and no same-origin referrer — so it plays on genuine first
 arrival, not every time someone navigates back to the homepage. No JS, or
 reduced motion, and the markup never renders at all.
+
+(Testing this locally over `file://` is misleading: every document gets its own
+storage partition, so the session flag never appears to persist. It works
+normally once served over http/https.)
 
 ## Intro lab — `intro-lab.html`
 
@@ -107,13 +114,13 @@ only honest way to judge one.
 
 | # | Name | Words? | Idea |
 | --- | --- | --- | --- |
-| 01 | Beats | Words | The current homepage intro — three flat fields, disc wipes |
+| 01 | Beats | Words | Three flat fields, disc wipes |
 | 02 | Eclipse | None | Amber sun and ink moon converge, corona flares, light floods out |
 | 03 | Eclipse Transit | Numerals | The moon crosses the full frame over a loading count, flipping it to amber |
 | 04 | Big Bang | None | Core pulses, rays fire, planets travel out then collapse back |
 | 05 | Counter | Numerals | 0→100 count with the colour field flipping underneath |
 | 06 | Slats | Words | Six columns sweep down then up, the name lands in the gap |
-| 07 | Orbit Lock | None | Rings draw themselves, planets snap on, the system flies past |
+| 07 | Orbit Lock | None | Rings draw themselves, planets snap on, the system flies past — **now shipping on the homepage, with the loading count added at the centre** |
 
 **03 Eclipse Transit** is the one worth understanding. The counter is drawn
 twice — a dark layer on the amber field and a light layer clipped to

@@ -323,7 +323,14 @@
    ========================================================================== */
 .v6 { background: var(--surface); }
 .v6-system { inset: 0; transform-origin: 50% 50%; }
-.v6-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: rotate(-90deg); }
+.v6-rings {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100cqmin; height: 100cqmin;
+  translate: -50% -50%;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
 .v6-rings circle {
   fill: none;
   fill: none;

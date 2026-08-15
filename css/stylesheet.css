@@ -1533,64 +1533,57 @@ a.planet { display: block; text-decoration: none; cursor: pointer; }
 }
 
 /* ==========================================================================
-   INTRO SEQUENCE
-   Three beats, each a flat colour field wiped in by a growing disc.
-   Armed by an inline script in <head>, so with JS off it never renders
-   and the visitor lands straight on the hero.
+   INTRO SEQUENCE — "Orbit Lock"
+   Rings draw themselves, planets snap onto each, a loading count runs at the
+   centre, then the whole system flies past the camera.
+
+   Armed by an inline script in <head>, so with JS off it never renders and
+   the visitor lands straight on the hero.
    ========================================================================== */
+@property --intro-n { syntax: "<integer>"; initial-value: 0; inherits: false; }
+
 html:not(.intro-armed) .intro { display: none; }
 html.intro-armed { overflow: hidden; }
-html.intro-armed.intro-done { overflow: visible; }  /* lock released, styles stay */
-html.intro-armed .warp-in { display: none; }        /* the intro is the entrance */
-html.intro-armed main { animation-delay: 3.35s; }   /* hero rises as the intro clears */
-html.intro-armed.intro-done main { animation-delay: 0s; } /* skipped early? go now */
+html.intro-armed.intro-done { overflow: visible; }   /* lock released, styles stay */
+html.intro-armed .warp-in { display: none; }         /* the intro is the entrance */
+html.intro-armed main { animation-delay: 4.5s; }     /* hero rises as the intro clears */
+html.intro-armed.intro-done main { animation-delay: 0s; }  /* skipped early? go now */
 
 .intro {
   position: fixed;
   inset: 0;
   z-index: 160;
   overflow: hidden;
-  background: var(--indigo);
+  background: var(--surface);
   clip-path: circle(150% at 50% 50%);
   transition: clip-path 0.9s var(--ease-warp);
 }
 .intro.is-done { clip-path: circle(0% at 50% 50%); }
 .intro.is-gone { display: none; }
 
-/* Each beat arrives as a disc scaling up to fill the frame */
-.intro-disc {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 165vmax;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  translate: -50% -50%;
-  scale: 0;
-  transition: scale 1.05s var(--ease-warp);
-}
-.intro-disc--a { background: var(--amber); }
-.intro-disc--b { background: var(--surface); }
-.intro.is-beat-2 .intro-disc--a,
-.intro.is-beat-3 .intro-disc--a { scale: 1; }
-.intro.is-beat-3 .intro-disc--b { scale: 1; }
+/* The system: a square viewBox scaled with xMidYMid meet, so 400 viewBox units
+   map to exactly 100vmin. A ring of radius R therefore sits at (R / 4) vmin,
+   and the planets can be placed on it in the same unit. */
+.intro-system { position: absolute; inset: 0; transform-origin: 50% 50%; }
+/* Rings are CSS boxes rather than SVG. Both they and the planets are sized in
+   vmin from the same centre, so a planet at --r lands exactly on the ring of
+   radius --r at every viewport — no viewBox scaling to reason about. The
+   draw-on is a conic-gradient mask sweeping from 12 o'clock. */
+@property --sweep { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
 
-/* Rings + planets converge on the last beat */
-.intro-rings {
+.intro-ring {
   position: absolute;
   top: 50%; left: 50%;
-  width: 130vmax; height: 130vmax;
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
   translate: -50% -50%;
-  opacity: 0;
-  transition: opacity 0.8s var(--ease) 0.15s;
-  animation: spin 120s linear infinite;
+  border-radius: 50%;
+  border: 1px solid rgba(249, 249, 255, 0.28);
+  -webkit-mask-image: conic-gradient(from 0deg, #000 0 var(--sweep), transparent var(--sweep) 360deg);
+          mask-image: conic-gradient(from 0deg, #000 0 var(--sweep), transparent var(--sweep) 360deg);
 }
-.intro.is-beat-3 .intro-rings { opacity: 1; }
-.intro-rings ellipse {
-  fill: none;
-  stroke: rgba(249, 249, 255, 0.12);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
+.intro-ring--lit { border-color: rgba(255, 195, 41, 0.5); }
+
 .intro-orb {
   position: absolute;
   top: 50%; left: 50%;
@@ -1599,38 +1592,64 @@ html.intro-armed.intro-done main { animation-delay: 0s; } /* skipped early? go n
   margin: calc(var(--s) / -2);
   border-radius: 50%;
   background: var(--c);
-  transform: translate(0, 0) scale(0);
-  transition: transform 1.1s var(--ease-orbit) var(--d, 0s);
+  transform: translate(var(--x), var(--y)) scale(0);
 }
-.intro.is-beat-3 .intro-orb { transform: translate(var(--x), var(--y)) scale(1); }
 
-/* Words */
-.intro-words {
-  position: relative;
-  z-index: 3;
-  height: 100%;
-}
-.intro-word {
+/* Loading count at the centre of the system */
+.intro-count {
   position: absolute;
-  top: 50%; left: 50%;
-  translate: -50% -50%;
-  white-space: nowrap;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
   font-family: var(--font-display);
   font-weight: 200;
-  font-size: clamp(2.4rem, 10vw, 8.5rem);
-  letter-spacing: -0.045em;
+  font-size: 18vmin;
+  letter-spacing: -0.05em;
   line-height: 1;
   color: var(--paper);
+  counter-reset: introc var(--intro-n);
   opacity: 0;
-  transform: translateY(0.35em);
-  transition: opacity 0.55s var(--ease), transform 0.85s var(--ease-orbit);
 }
-.intro-word[data-beat="2"] { color: var(--surface); }
-.intro.is-beat-1 .intro-word[data-beat="1"],
-.intro.is-beat-2 .intro-word[data-beat="2"],
-.intro.is-beat-3 .intro-word[data-beat="3"] { opacity: 1; transform: none; }
+.intro-count::after { content: counter(introc); }
 
-/* HUD — counter left, skip right, exactly as the reference frames it */
+.intro-wipe {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12vmin;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--amber);
+  scale: 0;
+}
+
+.intro.is-running .intro-system       { animation: introSystem 4.6s var(--ease-orbit) both; }
+.intro.is-running .intro-ring         { animation: introDraw 1.5s var(--ease-orbit) var(--d, 0s) both; }
+.intro.is-running .intro-orb          { animation: introSnap 1s var(--ease-orbit) var(--d, 0s) both; }
+.intro.is-running .intro-count        { animation: introCount 3s linear 0.35s both, introFade 4.6s var(--ease) both; }
+.intro.is-running .intro-wipe         { animation: introWipe 4.6s var(--ease-warp) both; }
+.intro.is-running .intro-hud          { animation: introHud 4.6s var(--ease) both; }
+
+@keyframes introDraw { to { --sweep: 360deg; } }
+@keyframes introSnap {
+  0%   { transform: translate(var(--x), var(--y)) scale(0); }
+  65%  { transform: translate(var(--x), var(--y)) scale(1.25); }
+  100% { transform: translate(var(--x), var(--y)) scale(1); }
+}
+@keyframes introSystem {
+  0%   { transform: rotate(-22deg) scale(0.72); opacity: 0; }
+  12%  { opacity: 1; }
+  40%  { transform: rotate(0deg) scale(1); }
+  73%  { transform: rotate(9deg) scale(1.05); opacity: 1; }
+  100% { transform: rotate(26deg) scale(6.5); opacity: 0; }
+}
+@keyframes introCount { from { --intro-n: 0; } to { --intro-n: 100; } }
+@keyframes introFade  { 0% { opacity: 0; } 8% { opacity: 1; } 72% { opacity: 1; } 80% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes introWipe  { 0%, 84% { scale: 0; } 100% { scale: 30; } }
+@keyframes introHud   { 0% { opacity: 0; } 10% { opacity: 1; } 78% { opacity: 1; } 86% { opacity: 0; } 100% { opacity: 0; } }
+
+/* HUD — wordmark left, skip right, as the reference frames it */
 .intro-hud {
   position: absolute;
   inset: auto 0 0 0;
@@ -1640,36 +1659,34 @@ html.intro-armed.intro-done main { animation-delay: 0s; } /* skipped early? go n
   justify-content: space-between;
   padding: 0 var(--gutter) 26px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--paper);
   opacity: 0;
-  transition: opacity 0.5s var(--ease) 0.4s, color 0.5s;
 }
-.intro.is-beat-1 .intro-hud,
-.intro.is-beat-2 .intro-hud,
-.intro.is-beat-3 .intro-hud { opacity: 1; }
-.intro.is-beat-2 .intro-hud { color: var(--surface); }
-.intro-count b { font-size: 20px; font-weight: 500; }
-.intro-count span { opacity: 0.55; }
+.intro-mark { opacity: 0.75; }
 .intro-skip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 8px 4px;
-  font-family: inherit;
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
   color: inherit;
 }
 .intro-skip i {
   display: block;
   width: 9px; height: 9px;
   border-radius: 50%;
-  background: currentColor;
+  background: var(--amber);
   transition: transform 0.4s var(--ease);
 }
 .intro-skip:hover i { transform: scale(1.6); }
 
-@media (max-width: 560px) { .intro-hud { padding-bottom: 20px; } }
+@media (max-width: 560px) {
+  .intro-hud { padding-bottom: 20px; font-size: 10.5px; }
+  .intro-count { font-size: 24vmin; }
+}
+
