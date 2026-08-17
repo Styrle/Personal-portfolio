@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Josh Serpis — designer-developer working across UX, UI and front-end development.">
+  <meta name="description" content="Small live experiments — CSS motion, canvas, SVG and AI interface toys. Every one runs in the page and can be edited on the spot.">
   <meta name="theme-color" content="#101415">
-  <title>About — Josh Serpis</title>
+  <title>Playground — Josh Serpis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="stylesheet" href="css/blog.css">
+  <link rel="stylesheet" href="css/playground.css">
 </head>
 <body>
 
@@ -22,8 +24,8 @@
       <a class="brand" href="index.html">Josh<span>.</span>Serpis<small>AI / Full-Stack Engineer</small></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active" aria-current="page">About</a></li>
-        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html" class="active" aria-current="page">Work</a></li>
         <li><a href="blog.html">Writing</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -52,11 +54,11 @@
     <a class="planet" data-planet="home" href="index.html" tabindex="-1" aria-hidden="true"    style="--s:clamp(90px,11vw,150px); --x:26vw; --y:-24vh; --c:var(--amber);       --d:.16s; --dur:15s; --dx:18px;  --dy:-24px"><span class="planet-label">Home</span></a>
     <a class="planet" data-planet="about" href="about.html" tabindex="-1" aria-hidden="true"   style="--s:clamp(64px,7vw,96px);   --x:42vw; --y:2vh;   --c:var(--indigo-lift); --d:.22s; --dur:12s; --dx:-16px; --dy:18px"><span class="planet-label">About</span></a>
     <a class="planet" data-planet="work" href="work.html" tabindex="-1" aria-hidden="true"    style="--s:60px; --x:30vw; --y:16vh;  --c:var(--amber-deep);  --d:.30s; --dur:17s; --dx:22px;  --dy:14px"><span class="planet-label">Work</span></a>
+    <a class="planet" data-planet="blog" href="blog.html" tabindex="-1" aria-hidden="true"    style="--s:52px; --x:8vw;  --y:34vh;  --c:var(--amethyst);    --d:.34s; --dur:16s; --dx:-18px; --dy:-20px"><span class="planet-label">Writing</span></a>
     <a class="planet" data-planet="contact" href="contact.html" tabindex="-1" aria-hidden="true" style="--s:46px; --x:14vw; --y:-13vh;  --c:var(--indigo-lift); --d:.38s; --dur:13s; --dx:-20px; --dy:-16px"><span class="planet-label">Contact</span></a>
     <span class="planet" style="--s:clamp(120px,17vw,220px); --x:-52vw; --y:48vh; --c:var(--indigo); --d:.20s; --dur:20s; --dx:26px; --dy:-18px"></span>
     <span class="planet" style="--s:20px; --x:16vw;  --y:-33vh; --c:var(--paper); --d:.40s; --dur:11s; --dx:-14px; --dy:20px"></span>
     <span class="planet" style="--s:12px; --x:44vw;  --y:-30vh; --c:var(--paper); --d:.44s; --dur:14s; --dx:16px;  --dy:16px"></span>
-    <a class="planet" data-planet="blog" href="blog.html" tabindex="-1" aria-hidden="true"    style="--s:52px; --x:8vw;   --y:34vh;  --c:var(--amethyst); --d:.34s; --dur:16s; --dx:-18px; --dy:-20px"><span class="planet-label">Writing</span></a>
     <span class="planet" style="--s:26px; --x:-31vw; --y:-36vh; --c:var(--amber); --d:.52s; --dur:18s; --dx:20px;  --dy:18px"></span>
 
     <div class="universe-inner">
@@ -93,6 +95,7 @@
   </div>
 
   <main>
+
     <header class="page-hero" data-lit>
       <div class="orbit-field" aria-hidden="true">
         <svg class="orbit-rings" viewBox="0 0 1000 700" focusable="false">
@@ -100,64 +103,47 @@
           <ellipse cx="500" cy="350" rx="340" ry="226"/>
           <ellipse cx="500" cy="350" rx="470" ry="312"/>
         </svg>
-        <span class="orb orb--float" style="--s:clamp(90px,13vw,190px); --t:14%; --l:74%; --c:var(--indigo); --depth:1; --d:.3s; --dur:14s; --dy:22px;"></span>
-        <span class="orb" style="--s:clamp(48px,5vw,72px); --t:66%; --l:60%; --c:var(--amber); --depth:1.9; --d:.44s;"></span>
-        <span class="orb orb--float" style="--s:26px; --t:20%; --l:58%; --c:var(--amber-deep); --depth:2.6; --d:.54s; --dur:10s; --dy:-16px;"></span>
-        <span class="orb" style="--s:14px; --t:78%; --l:88%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
+        <span class="orb orb--float" style="--s:clamp(110px,15vw,220px); --t:8%; --l:68%; --c:var(--amber); --depth:1; --d:.3s; --dur:12s; --dy:-24px;"></span>
+        <span class="orb" style="--s:clamp(56px,6vw,84px); --t:58%; --l:86%; --c:var(--indigo); --depth:1.8; --d:.44s;"></span>
+        <span class="orb orb--float" style="--s:30px; --t:72%; --l:62%; --c:var(--amber-deep); --depth:2.4; --d:.54s; --dur:9s; --dy:18px;"></span>
+        <span class="orb" style="--s:16px; --t:26%; --l:56%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
       </div>
       <div class="container">
-        <p class="eyebrow">About me</p>
+        <p class="eyebrow">Playground</p>
         <h1>
-          <span class="rise-line"><span>AI engineer with</span></span>
-          <span class="rise-line"><span style="--d:.1s">a designer's eye.</span></span>
+          <span class="rise-line"><span>Things that</span></span>
+          <span class="rise-line"><span style="--d:.1s">run.</span></span>
         </h1>
-        <p class="lede sweep" style="--d:.3s">Five years at CapPlan, three of them building AI systems, plus freelance work alongside the whole way through.</p>
+        <p class="lede sweep" style="--d:.3s">Small experiments that never became projects. Every one runs live on this page — open the editor, change the code, and it re-runs as you type.</p>
       </div>
     </header>
 
-    <div class="container about-grid">
-      <div class="about-photo reveal">
-        <img src="images/portrait-2.jpg" alt="Portrait of Josh Serpis">
+    <section class="work-index" style="padding-top:clamp(24px,4vh,48px)">
+      <div class="container">
+
+        <!-- ============================================================
+             SECTION TABS — the same strip lives at the top of work.html
+             ============================================================ -->
+        <nav class="section-tabs" aria-label="Work sections">
+          <a href="work.html">Case studies <span class="tab-count">08</span></a>
+          <a href="playground.html" class="is-current" aria-current="page">Playground <span class="tab-count" data-pen-count>04</span></a>
+        </nav>
+
+        <!-- filter chips are generated from the tags the pens declare -->
+        <div class="pen-filters reveal" data-pen-filters></div>
+
+        <ul class="pen-grid" data-pen-grid></ul>
+
+        <noscript>
+          <p style="color:var(--on-surface-dim); padding-bottom:80px; max-width:60ch">
+            The playground runs code in the page, so it needs JavaScript enabled.
+            The rest of the site works fine without it — the
+            <a href="work.html" style="color:var(--periwinkle)">case studies</a> are a good place to go instead.
+          </p>
+        </noscript>
+
       </div>
-      <div class="about-copy reveal" style="--d:.12s">
-        <h2>The short version</h2>
-        <p>I'm an AI engineer at CapPlan, where I've been for five years — the last three focused on AI, and recently promoted onto full-stack. Day to day that means agent frameworks, evaluation harnesses that catch regressions before users do, Azure ML and DevOps pipelines, and the internal scaffolding a team runs on: documentation, shared commands, Claude Code workflows.</p>
-        <p>I've freelanced alongside that for the same five years, mostly AI and full-stack applications — agent systems, integrations, and the products built around them.</p>
-        <p>I got my start in PHP, then spent my early career in UX, UI and front-end work. The case studies on this site are from that era: an NHS pre-surgery app, esports platforms, a run of client sites. It's why I still care what an interface feels like, not just whether the endpoint returns a 200 — and it's the part of my background clients tend to notice first.</p>
-        <p>Outside work I'm usually breaking my own side projects on GitHub.</p>
-
-        <ul class="fact-list">
-          <li><b>Currently</b><span>AI &amp; full-stack engineer, CapPlan</span></li>
-          <li><b>Experience</b><span>5 years engineering · 3 in AI</span></li>
-          <li><b>Freelance</b><span>Available alongside — AI &amp; full-stack</span></li>
-          <li><b>Based in</b><span>South West England / remote</span></li>
-          <li><b>Education</b><span>BA Digital Media</span></li>
-        </ul>
-
-        <div class="toolkit">
-          <h4>Toolkit</h4>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">.NET</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">Next.js</span>
-            <span class="chip">React</span>
-            <span class="chip">Node</span>
-            <span class="chip amber">Microsoft Agent Framework</span>
-            <span class="chip amber">Azure AI</span>
-            <span class="chip amber">Azure ML</span>
-            <span class="chip amber">Azure DevOps</span>
-            <span class="chip">Claude Code</span>
-            <span class="chip">PHP</span>
-          </div>
-        </div>
-
-        <div class="hero-actions" style="margin-top:20px">
-          <a class="btn btn-primary" href="work.html">See my work <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          <a class="btn btn-ghost" href="contact.html">Get in touch</a>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <section class="big-cta grain" data-lit>
       <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
@@ -174,6 +160,38 @@
     </section>
 
   </main>
+
+  <!-- ============================ EDITOR ============================ -->
+  <div class="editor" role="dialog" aria-modal="true" aria-label="Pen editor" aria-hidden="true">
+    <div class="editor-bar">
+      <span class="editor-name" data-editor-name>Pen</span>
+      <span class="editor-note">Edits are yours for this visit only — nothing is saved</span>
+      <span class="editor-actions">
+        <button class="pen-btn" type="button" data-editor-run>Run</button>
+        <button class="pen-btn" type="button" data-editor-reset>Reset</button>
+        <button class="pen-btn" type="button" data-editor-full>Full screen</button>
+        <button class="pen-btn pen-btn--go" type="button" data-editor-close>Close (Esc)</button>
+      </span>
+    </div>
+
+    <div class="editor-split">
+      <div class="editor-code">
+        <div class="code-tabs" role="tablist" aria-label="Source">
+          <button class="code-tab" type="button" role="tab" data-pane="html" aria-selected="true">HTML</button>
+          <button class="code-tab" type="button" role="tab" data-pane="css" aria-selected="false">CSS</button>
+          <button class="code-tab" type="button" role="tab" data-pane="js" aria-selected="false">JS</button>
+        </div>
+        <textarea class="code-area" data-code="html" spellcheck="false" aria-label="HTML source"></textarea>
+        <textarea class="code-area" data-code="css" spellcheck="false" aria-label="CSS source" hidden></textarea>
+        <textarea class="code-area" data-code="js" spellcheck="false" aria-label="JavaScript source" hidden></textarea>
+      </div>
+
+      <div class="editor-preview">
+        <iframe class="editor-frame" title="Pen result" sandbox="allow-scripts"></iframe>
+        <span class="editor-status"><i aria-hidden="true"></i><span data-status-text>live</span></span>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
@@ -196,5 +214,7 @@
   <div class="hud-bar" aria-hidden="true"></div>
 
   <script src="js/script.js"></script>
+  <script src="js/pens.js"></script>
+  <script src="js/playground.js"></script>
 </body>
 </html>

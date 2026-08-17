@@ -1,0 +1,289 @@
+/* ==========================================================================
+   PLAYGROUND — live code pens
+   Loads after stylesheet.css and reuses its tokens.
+
+   The subject here is code that runs, so the code and its output are the
+   design: cards lead with a live frame rather than a screenshot, and the
+   editor is a hard split — mono on the deepest surface, result on the page
+   ground. That split is the one bold move; everything around it stays flat.
+   ========================================================================== */
+
+/* ---------- Grid ---------- */
+.pen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+  padding-bottom: clamp(56px, 9vh, 104px);
+  list-style: none;
+  margin: 0;
+}
+.pen-grid li.is-hidden { display: none; }
+
+.pen-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--ghost);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.pen-card:hover { border-color: rgba(255, 195, 41, 0.35); transform: translateY(-4px); box-shadow: var(--glow); }
+.pen-card:focus-within { border-color: var(--periwinkle); }
+
+/* The live frame. Fixed aspect so the grid stays even whatever the pen does. */
+.pen-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--surface-lowest);
+  border-bottom: 1px solid var(--ghost);
+  overflow: hidden;
+}
+/* The frame lays out at a full desktop size and is then scaled down, so a
+   card shows a true miniature of the pen rather than a squashed mobile
+   version of it. --fit is set per card in playground.js. */
+.pen-frame {
+  position: absolute;
+  top: 0; left: 0;
+  width: 900px;
+  height: 563px;
+  border: 0;
+  display: block;
+  background: transparent;
+  transform-origin: 0 0;
+  transform: scale(var(--fit, 0.38));
+}
+/* Placeholder until the pen is built — and the permanent state under
+   reduced motion, where nothing runs until it's asked to. */
+.pen-idle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  align-content: center;
+  background: var(--surface-lowest);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--outline);
+  cursor: pointer;
+  transition: opacity 0.4s var(--ease), color 0.3s;
+}
+.pen-idle:hover { color: var(--amber); }
+.pen-idle::before {
+  content: "";
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: radial-gradient(circle at 50% 50%, currentColor 0 3px, transparent 3px);
+  transition: transform 0.5s var(--ease-orbit);
+}
+.pen-idle:hover::before { transform: scale(1.12); }
+.pen-stage.is-live .pen-idle { opacity: 0; pointer-events: none; }
+
+.pen-body { display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 6px; flex: 1; }
+.pen-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em; }
+.pen-card p { font-size: 14.5px; color: var(--on-surface-dim); }
+.pen-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: 6px; }
+.pen-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--outline);
+  border: 1px solid var(--ghost);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+}
+
+.pen-actions { display: flex; flex-wrap: wrap; gap: 9px; padding: 16px 22px 20px; }
+.pen-btn {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ghost);
+  background: none;
+  color: var(--on-surface-dim);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s var(--ease), color 0.3s, border-color 0.3s, transform 0.3s var(--ease);
+}
+.pen-btn:hover { color: var(--surface); background: var(--on-surface); border-color: var(--on-surface); }
+.pen-btn:active { transform: scale(0.97); }
+.pen-btn:focus-visible { outline: 3px solid var(--periwinkle); outline-offset: 3px; }
+.pen-btn--go { border-color: rgba(255, 195, 41, 0.45); color: var(--amber); }
+.pen-btn--go:hover { background: var(--amber); border-color: var(--amber); color: var(--surface); }
+
+/* ---------- Handing the pointer over to a pen ------------------------------
+   The site hides the real cursor and draws its own, but mousemove doesn't
+   cross into a sandboxed iframe — the custom dot would freeze at the edge
+   while the real pointer stayed hidden, leaving nothing visible inside a
+   pen. So frames get the real cursor back and the custom one steps aside.
+   Matters most for Goo pointer, which is entirely about pointer position. */
+.has-cursor .pen-frame,
+.has-cursor .editor-frame { cursor: auto; }
+body.pen-hover .cursor-dot,
+body.pen-hover .cursor-ring { opacity: 0; }
+
+/* ---------- Filter row (shares the blog's chips if both stylesheets load,
+     but defined here so the playground stands alone) ---------- */
+.pen-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: clamp(18px, 3vh, 30px);
+}
+
+/* ==========================================================================
+   EDITOR — full-screen split
+   ========================================================================== */
+body.pen-open { overflow: hidden; }
+
+.editor {
+  position: fixed;
+  inset: 0;
+  z-index: 170;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease), visibility 0s linear 0.35s;
+}
+.editor.is-open { visibility: visible; opacity: 1; transition: opacity 0.35s var(--ease), visibility 0s; }
+
+.editor-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px var(--gutter);
+  border-bottom: 1px solid var(--ghost);
+  background: var(--surface-lowest);
+  flex: none;
+}
+.editor-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+.editor-note {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--outline);
+}
+.editor-actions { display: flex; gap: 9px; margin-left: auto; }
+
+.editor-split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(320px, 42%) 1fr;
+  min-height: 0;
+}
+
+/* Code side */
+.editor-code {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface-lowest);
+  border-right: 1px solid var(--ghost);
+}
+.code-tabs { display: flex; gap: 2px; padding: 10px 14px 0; flex: none; }
+.code-tab {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--outline);
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.code-tab:hover { color: var(--on-surface); }
+.code-tab[aria-selected="true"] { color: var(--amber); border-bottom-color: var(--amber); }
+.code-tab:focus-visible { outline: 3px solid var(--periwinkle); outline-offset: -3px; }
+
+.code-area {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  resize: none;
+  border: 0;
+  padding: 18px 20px 24px;
+  background: var(--surface-lowest);
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+.code-area:focus { outline: 0; box-shadow: inset 2px 0 0 var(--periwinkle); }
+.code-area[hidden] { display: none; }
+.code-area::selection { background: rgba(143, 146, 255, 0.35); }
+
+/* Result side */
+.editor-preview { position: relative; min-width: 0; min-height: 0; background: var(--surface-lowest); }
+.editor-frame { width: 100%; height: 100%; border: 0; display: block; background: transparent; }
+.editor-status {
+  position: absolute;
+  right: 14px; bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ghost);
+  background: rgba(11, 15, 16, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--outline);
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.editor-status i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  transition: background 0.3s, transform 0.3s var(--ease);
+}
+.editor-status.is-running { color: var(--amber); }
+.editor-status.is-running i { transform: scale(1.35); }
+
+@media (max-width: 860px) {
+  .editor-split { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+  .editor-code { border-right: 0; border-bottom: 1px solid var(--ghost); }
+  .editor-bar { flex-wrap: wrap; gap: 10px; }
+  .editor-actions { margin-left: 0; width: 100%; }
+  .editor-note { display: none; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .pen-card:hover { transform: none; }
+  .pen-idle:hover::before { transform: none; }
+}

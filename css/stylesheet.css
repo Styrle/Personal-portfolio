@@ -1542,11 +1542,17 @@ a.planet { display: block; text-decoration: none; cursor: pointer; }
    ========================================================================== */
 @property --intro-n { syntax: "<integer>"; initial-value: 0; inherits: false; }
 
+/* Every duration below is the original value multiplied by --intro-speed, so
+   the whole sequence is tuned from one number. js/script.js reads the same
+   property for RUN, which is what stops the two drifting apart.
+   1 = the original 5.5s sequence · 0.5 = 2.75s */
+:root { --intro-speed: 0.5; }
+
 html:not(.intro-armed) .intro { display: none; }
 html.intro-armed { overflow: hidden; }
 html.intro-armed.intro-done { overflow: visible; }   /* lock released, styles stay */
 html.intro-armed .warp-in { display: none; }         /* the intro is the entrance */
-html.intro-armed main { animation-delay: 4.5s; }     /* hero rises as the intro clears */
+html.intro-armed main { animation-delay: calc(4.5s * var(--intro-speed)); } /* hero rises as the intro clears */
 html.intro-armed.intro-done main { animation-delay: 0s; }  /* skipped early? go now */
 
 .intro {
@@ -1556,7 +1562,7 @@ html.intro-armed.intro-done main { animation-delay: 0s; }  /* skipped early? go 
   overflow: hidden;
   background: var(--surface);
   clip-path: circle(150% at 50% 50%);
-  transition: clip-path 0.9s var(--ease-warp);
+  transition: clip-path calc(0.9s * var(--intro-speed)) var(--ease-warp);
 }
 .intro.is-done { clip-path: circle(0% at 50% 50%); }
 .intro.is-gone { display: none; }
@@ -1624,12 +1630,13 @@ html.intro-armed.intro-done main { animation-delay: 0s; }  /* skipped early? go 
   scale: 0;
 }
 
-.intro.is-running .intro-system       { animation: introSystem 4.6s var(--ease-orbit) both; }
-.intro.is-running .intro-ring         { animation: introDraw 1.5s var(--ease-orbit) var(--d, 0s) both; }
-.intro.is-running .intro-orb          { animation: introSnap 1s var(--ease-orbit) var(--d, 0s) both; }
-.intro.is-running .intro-count        { animation: introCount 3s linear 0.35s both, introFade 4.6s var(--ease) both; }
-.intro.is-running .intro-wipe         { animation: introWipe 4.6s var(--ease-warp) both; }
-.intro.is-running .intro-hud          { animation: introHud 4.6s var(--ease) both; }
+.intro.is-running .intro-system       { animation: introSystem calc(4.6s * var(--intro-speed)) var(--ease-orbit) both; }
+.intro.is-running .intro-ring         { animation: introDraw calc(1.5s * var(--intro-speed)) var(--ease-orbit) calc(var(--d, 0s) * var(--intro-speed)) both; }
+.intro.is-running .intro-orb          { animation: introSnap calc(1s * var(--intro-speed)) var(--ease-orbit) calc(var(--d, 0s) * var(--intro-speed)) both; }
+.intro.is-running .intro-count        { animation: introCount calc(3s * var(--intro-speed)) linear calc(0.35s * var(--intro-speed)) both,
+                                                   introFade calc(4.6s * var(--intro-speed)) var(--ease) both; }
+.intro.is-running .intro-wipe         { animation: introWipe calc(4.6s * var(--intro-speed)) var(--ease-warp) both; }
+.intro.is-running .intro-hud          { animation: introHud calc(4.6s * var(--intro-speed)) var(--ease) both; }
 
 @keyframes introDraw { to { --sweep: 360deg; } }
 @keyframes introSnap {
@@ -1690,3 +1697,70 @@ html.intro-armed.intro-done main { animation-delay: 0s; }  /* skipped early? go 
   .intro-count { font-size: 24vmin; }
 }
 
+/* ==========================================================================
+   APPEND TO css/stylesheet.css
+   Paste this block at the end of the file, before the RESPONSIVE section
+   if you want to keep the media queries grouped — anywhere works.
+
+   Section tabs sit under a page hero and split one section into parts.
+   Used by Work (Case studies / Playground). Written as real links rather
+   than JS tabs so each half keeps its own URL, its own title and its own
+   place in the browser's history.
+   ========================================================================== */
+.section-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  margin-bottom: clamp(20px, 3.5vh, 38px);
+  border-bottom: 1px solid var(--outline-dim);
+}
+.section-tabs a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--outline);
+  transition: color 0.3s var(--ease);
+}
+.section-tabs a:hover { color: var(--on-surface); }
+/* the amber rule grows out from the left edge, matching the site's
+   "things travel outward" motion language */
+.section-tabs a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.45s var(--ease-warp);
+}
+.section-tabs a:hover::after { transform: scaleX(0.4); }
+.section-tabs a.is-current { color: var(--on-surface); }
+.section-tabs a.is-current::after,
+.section-tabs a.is-current:hover::after { transform: scaleX(1); }
+.section-tabs a:focus-visible { outline: 3px solid var(--periwinkle); outline-offset: -3px; }
+.tab-count {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--outline);
+  border: 1px solid var(--ghost);
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+  transition: border-color 0.3s, color 0.3s;
+}
+.section-tabs a.is-current .tab-count { color: var(--amber); border-color: rgba(255, 195, 41, 0.4); }
+
+@media (max-width: 560px) {
+  .section-tabs { overflow-x: auto; scrollbar-width: none; }
+  .section-tabs::-webkit-scrollbar { display: none; }
+  .section-tabs a { white-space: nowrap; padding: 12px 14px; }
+}

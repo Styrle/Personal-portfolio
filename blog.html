@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Josh Serpis — designer-developer working across UX, UI and front-end development.">
+  <meta name="description" content="Notes on AI engineering, evaluation pipelines and full-stack craft — written by Josh Serpis while building the thing being written about.">
   <meta name="theme-color" content="#101415">
-  <title>About — Josh Serpis</title>
+  <title>Writing — Josh Serpis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="stylesheet" href="css/blog.css">
 </head>
 <body>
 
@@ -22,9 +23,9 @@
       <a class="brand" href="index.html">Josh<span>.</span>Serpis<small>AI / Full-Stack Engineer</small></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="work.html">Work</a></li>
-        <li><a href="blog.html">Writing</a></li>
+        <li><a href="blog.html" class="active" aria-current="page">Writing</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-expanded="false" aria-controls="universe" aria-label="Open menu">
@@ -52,11 +53,11 @@
     <a class="planet" data-planet="home" href="index.html" tabindex="-1" aria-hidden="true"    style="--s:clamp(90px,11vw,150px); --x:26vw; --y:-24vh; --c:var(--amber);       --d:.16s; --dur:15s; --dx:18px;  --dy:-24px"><span class="planet-label">Home</span></a>
     <a class="planet" data-planet="about" href="about.html" tabindex="-1" aria-hidden="true"   style="--s:clamp(64px,7vw,96px);   --x:42vw; --y:2vh;   --c:var(--indigo-lift); --d:.22s; --dur:12s; --dx:-16px; --dy:18px"><span class="planet-label">About</span></a>
     <a class="planet" data-planet="work" href="work.html" tabindex="-1" aria-hidden="true"    style="--s:60px; --x:30vw; --y:16vh;  --c:var(--amber-deep);  --d:.30s; --dur:17s; --dx:22px;  --dy:14px"><span class="planet-label">Work</span></a>
+    <a class="planet" data-planet="blog" href="blog.html" tabindex="-1" aria-hidden="true"    style="--s:52px; --x:8vw;  --y:34vh;  --c:var(--amethyst);    --d:.34s; --dur:16s; --dx:-18px; --dy:-20px"><span class="planet-label">Writing</span></a>
     <a class="planet" data-planet="contact" href="contact.html" tabindex="-1" aria-hidden="true" style="--s:46px; --x:14vw; --y:-13vh;  --c:var(--indigo-lift); --d:.38s; --dur:13s; --dx:-20px; --dy:-16px"><span class="planet-label">Contact</span></a>
     <span class="planet" style="--s:clamp(120px,17vw,220px); --x:-52vw; --y:48vh; --c:var(--indigo); --d:.20s; --dur:20s; --dx:26px; --dy:-18px"></span>
     <span class="planet" style="--s:20px; --x:16vw;  --y:-33vh; --c:var(--paper); --d:.40s; --dur:11s; --dx:-14px; --dy:20px"></span>
     <span class="planet" style="--s:12px; --x:44vw;  --y:-30vh; --c:var(--paper); --d:.44s; --dur:14s; --dx:16px;  --dy:16px"></span>
-    <a class="planet" data-planet="blog" href="blog.html" tabindex="-1" aria-hidden="true"    style="--s:52px; --x:8vw;   --y:34vh;  --c:var(--amethyst); --d:.34s; --dur:16s; --dx:-18px; --dy:-20px"><span class="planet-label">Writing</span></a>
     <span class="planet" style="--s:26px; --x:-31vw; --y:-36vh; --c:var(--amber); --d:.52s; --dur:18s; --dx:20px;  --dy:18px"></span>
 
     <div class="universe-inner">
@@ -93,6 +94,7 @@
   </div>
 
   <main>
+
     <header class="page-hero" data-lit>
       <div class="orbit-field" aria-hidden="true">
         <svg class="orbit-rings" viewBox="0 0 1000 700" focusable="false">
@@ -100,64 +102,116 @@
           <ellipse cx="500" cy="350" rx="340" ry="226"/>
           <ellipse cx="500" cy="350" rx="470" ry="312"/>
         </svg>
-        <span class="orb orb--float" style="--s:clamp(90px,13vw,190px); --t:14%; --l:74%; --c:var(--indigo); --depth:1; --d:.3s; --dur:14s; --dy:22px;"></span>
-        <span class="orb" style="--s:clamp(48px,5vw,72px); --t:66%; --l:60%; --c:var(--amber); --depth:1.9; --d:.44s;"></span>
-        <span class="orb orb--float" style="--s:26px; --t:20%; --l:58%; --c:var(--amber-deep); --depth:2.6; --d:.54s; --dur:10s; --dy:-16px;"></span>
-        <span class="orb" style="--s:14px; --t:78%; --l:88%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
+        <span class="orb orb--float" style="--s:clamp(110px,15vw,220px); --t:12%; --l:70%; --c:var(--amethyst); --depth:1; --d:.3s; --dur:13s; --dy:-22px;"></span>
+        <span class="orb" style="--s:clamp(56px,6vw,84px); --t:60%; --l:88%; --c:var(--indigo); --depth:1.8; --d:.44s;"></span>
+        <span class="orb orb--float" style="--s:30px; --t:74%; --l:64%; --c:var(--amber); --depth:2.4; --d:.54s; --dur:9s; --dy:18px;"></span>
+        <span class="orb" style="--s:16px; --t:28%; --l:58%; --c:var(--indigo-lift); --depth:3; --d:.62s;"></span>
       </div>
       <div class="container">
-        <p class="eyebrow">About me</p>
+        <p class="eyebrow">Writing</p>
         <h1>
-          <span class="rise-line"><span>AI engineer with</span></span>
-          <span class="rise-line"><span style="--d:.1s">a designer's eye.</span></span>
+          <span class="rise-line"><span>Notes from</span></span>
+          <span class="rise-line"><span style="--d:.1s">the build.</span></span>
         </h1>
-        <p class="lede sweep" style="--d:.3s">Five years at CapPlan, three of them building AI systems, plus freelance work alongside the whole way through.</p>
+        <p class="lede sweep" style="--d:.3s">Things I worked out the slow way — evaluation harnesses, agent design, and the unglamorous engineering that decides whether a demo ever becomes a product.</p>
       </div>
     </header>
 
-    <div class="container about-grid">
-      <div class="about-photo reveal">
-        <img src="images/portrait-2.jpg" alt="Portrait of Josh Serpis">
-      </div>
-      <div class="about-copy reveal" style="--d:.12s">
-        <h2>The short version</h2>
-        <p>I'm an AI engineer at CapPlan, where I've been for five years — the last three focused on AI, and recently promoted onto full-stack. Day to day that means agent frameworks, evaluation harnesses that catch regressions before users do, Azure ML and DevOps pipelines, and the internal scaffolding a team runs on: documentation, shared commands, Claude Code workflows.</p>
-        <p>I've freelanced alongside that for the same five years, mostly AI and full-stack applications — agent systems, integrations, and the products built around them.</p>
-        <p>I got my start in PHP, then spent my early career in UX, UI and front-end work. The case studies on this site are from that era: an NHS pre-surgery app, esports platforms, a run of client sites. It's why I still care what an interface feels like, not just whether the endpoint returns a 200 — and it's the part of my background clients tend to notice first.</p>
-        <p>Outside work I'm usually breaking my own side projects on GitHub.</p>
+    <section class="work-index" style="padding-top:clamp(16px,3vh,32px)">
+      <div class="container">
 
-        <ul class="fact-list">
-          <li><b>Currently</b><span>AI &amp; full-stack engineer, CapPlan</span></li>
-          <li><b>Experience</b><span>5 years engineering · 3 in AI</span></li>
-          <li><b>Freelance</b><span>Available alongside — AI &amp; full-stack</span></li>
-          <li><b>Based in</b><span>South West England / remote</span></li>
-          <li><b>Education</b><span>BA Digital Media</span></li>
+        <div class="blog-toolbar reveal">
+          <button class="filter-chip" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-chip" type="button" data-filter="ai-engineering" aria-pressed="false">AI engineering</button>
+          <button class="filter-chip" type="button" data-filter="platform" aria-pressed="false">Platform</button>
+          <button class="filter-chip" type="button" data-filter="craft" aria-pressed="false">Craft</button>
+          <button class="filter-chip" type="button" data-filter="process" aria-pressed="false">Process</button>
+          <span class="filter-count" data-filter-count>5 posts</span>
+        </div>
+
+        <!-- ============================================================
+             FEATURED POST
+             Move the data-tags attribute and the copy when a newer post
+             takes over; everything else stays put.
+             ============================================================ -->
+        <a class="post-feature reveal" href="blog/agent-scoreboard.html" data-tags="ai-engineering process">
+          <p class="eyebrow">Latest &middot; 2026.08.02</p>
+          <h2>Your agent doesn't need more tools. It needs a scoreboard.</h2>
+          <p>Every stuck agent project I've seen was fixed by measurement, not capability. Here's the harness I build first, why it's boring on purpose, and what it costs to skip it.</p>
+          <span class="post-more">Read it <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </a>
+
+        <!-- ============================================================
+             POST LIST
+             To add a post: copy one <li> block, change the date, title,
+             href, dek, read time and data-tags. Tags must match one of
+             the data-filter values in the toolbar above.
+             ============================================================ -->
+        <ul class="post-list reveal">
+
+          <li>
+            <a class="post-row" href="blog/agent-scoreboard.html" data-tags="ai-engineering process">
+              <span class="post-date">2026.08.02</span>
+              <h3>Your agent doesn't need more tools. It needs a scoreboard.</h3>
+              <span class="post-read">9 min</span>
+              <p class="post-dek">Why the evaluation harness comes before the tool belt, and what a good one actually contains.</p>
+              <span class="post-tags"><span class="post-tag">AI engineering</span><span class="post-tag">Process</span></span>
+            </a>
+          </li>
+
+          <li>
+            <a class="post-row" href="#" data-tags="ai-engineering">
+              <span class="post-date">2026.07.14</span>
+              <h3>Structured output is a contract, not a formatting trick</h3>
+              <span class="post-read">6 min</span>
+              <p class="post-dek">Treating the schema as an interface between two systems changes how you write it — and how you handle the day it isn't honoured.</p>
+              <span class="post-tags"><span class="post-tag">AI engineering</span></span>
+            </a>
+          </li>
+
+          <li>
+            <a class="post-row" href="#" data-tags="craft">
+              <span class="post-date">2026.06.21</span>
+              <h3>Ten thousand lines of vanilla: rebuilding this site with no build step</h3>
+              <span class="post-read">7 min</span>
+              <p class="post-dek">What you gain when there's nothing between the file you edit and the file the browser gets, and the three places it genuinely hurts.</p>
+              <span class="post-tags"><span class="post-tag">Craft</span></span>
+            </a>
+          </li>
+
+          <li>
+            <a class="post-row" href="#" data-tags="ai-engineering process">
+              <span class="post-date">2026.05.30</span>
+              <h3>Three questions before you give an agent another tool</h3>
+              <span class="post-read">5 min</span>
+              <p class="post-dek">Most tool belts grow by accident. A short filter that keeps the surface area honest and the traces readable.</p>
+              <span class="post-tags"><span class="post-tag">AI engineering</span><span class="post-tag">Process</span></span>
+            </a>
+          </li>
+
+          <li>
+            <a class="post-row" href="#" data-tags="platform process">
+              <span class="post-date">2026.04.18</span>
+              <h3>Azure ML pipelines that survive a handover</h3>
+              <span class="post-read">8 min</span>
+              <p class="post-dek">Naming, versioning and the documentation that means the next engineer doesn't rebuild it from scratch.</p>
+              <span class="post-tags"><span class="post-tag">Platform</span><span class="post-tag">Process</span></span>
+            </a>
+          </li>
+
         </ul>
 
-        <div class="toolkit">
-          <h4>Toolkit</h4>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">.NET</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">Next.js</span>
-            <span class="chip">React</span>
-            <span class="chip">Node</span>
-            <span class="chip amber">Microsoft Agent Framework</span>
-            <span class="chip amber">Azure AI</span>
-            <span class="chip amber">Azure ML</span>
-            <span class="chip amber">Azure DevOps</span>
-            <span class="chip">Claude Code</span>
-            <span class="chip">PHP</span>
-          </div>
+        <div class="post-empty">
+          <b>Nothing filed under that yet.</b>
+          <p>Try another tag, or <button class="filter-chip" type="button" data-filter="all" aria-pressed="false" style="margin-top:14px">show everything</button></p>
         </div>
 
-        <div class="hero-actions" style="margin-top:20px">
-          <a class="btn btn-primary" href="work.html">See my work <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          <a class="btn btn-ghost" href="contact.html">Get in touch</a>
-        </div>
+        <p class="blog-outro">
+          New posts land roughly monthly. <a href="contact.html">Tell me what you'd like read next</a> — I write about whatever I've just had to solve.
+        </p>
+
       </div>
-    </div>
+    </section>
 
     <section class="big-cta grain" data-lit>
       <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
@@ -196,5 +250,6 @@
   <div class="hud-bar" aria-hidden="true"></div>
 
   <script src="js/script.js"></script>
+  <script src="js/blog.js"></script>
 </body>
 </html>

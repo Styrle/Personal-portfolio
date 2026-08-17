@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Every stuck agent project I've seen was fixed by measurement, not capability. The evaluation harness I build first, and what it costs to skip it.">
+  <meta name="theme-color" content="#101415">
+  <title>Your agent needs a scoreboard — Josh Serpis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/stylesheet.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body>
+
+  <!-- Reading progress. This replaces the site-wide .hud-bar on post pages
+       rather than sitting on top of it: same 2px gradient rule, but measured
+       against the article so the footer and CTA don't count as unread. -->
+  <div class="read-bar" aria-hidden="true"></div>
+
+  <!-- page transition surfaces -->
+  <div class="warp-in" aria-hidden="true"></div>
+  <div class="warp-out" aria-hidden="true"></div>
+
+  <nav class="site-nav" aria-label="Main">
+    <div class="container">
+      <a class="brand" href="../index.html">Josh<span>.</span>Serpis<small>AI / Full-Stack Engineer</small></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../blog.html" class="active" aria-current="page">Writing</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="universe" aria-label="Open menu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================ THE UNIVERSE ============================ -->
+  <div class="universe grain" id="universe" aria-hidden="true">
+    <svg class="universe-orbits" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+      <ellipse cx="500" cy="500" rx="180" ry="120"/>
+      <ellipse cx="500" cy="500" rx="290" ry="196"/>
+      <ellipse cx="500" cy="500" rx="400" ry="272"/>
+      <ellipse cx="500" cy="500" rx="490" ry="340"/>
+    </svg>
+
+    <span class="universe-core" aria-hidden="true"></span>
+    <span class="ray" style="--a:-31deg; --len:34vw; --d:.14s"></span>
+    <span class="ray" style="--a:7deg;   --len:44vw; --d:.20s"></span>
+    <span class="ray" style="--a:-63deg; --len:32vw; --d:.26s"></span>
+    <span class="ray" style="--a:41deg;  --len:40vw; --d:.32s"></span>
+    <span class="ray" style="--a:139deg; --len:46vw; --d:.38s"></span>
+
+    <a class="planet" data-planet="home" href="../index.html" tabindex="-1" aria-hidden="true"    style="--s:clamp(90px,11vw,150px); --x:26vw; --y:-24vh; --c:var(--amber);       --d:.16s; --dur:15s; --dx:18px;  --dy:-24px"><span class="planet-label">Home</span></a>
+    <a class="planet" data-planet="about" href="../about.html" tabindex="-1" aria-hidden="true"   style="--s:clamp(64px,7vw,96px);   --x:42vw; --y:2vh;   --c:var(--indigo-lift); --d:.22s; --dur:12s; --dx:-16px; --dy:18px"><span class="planet-label">About</span></a>
+    <a class="planet" data-planet="work" href="../work.html" tabindex="-1" aria-hidden="true"    style="--s:60px; --x:30vw; --y:16vh;  --c:var(--amber-deep);  --d:.30s; --dur:17s; --dx:22px;  --dy:14px"><span class="planet-label">Work</span></a>
+    <a class="planet" data-planet="blog" href="../blog.html" tabindex="-1" aria-hidden="true"    style="--s:52px; --x:8vw;  --y:34vh;  --c:var(--amethyst);    --d:.34s; --dur:16s; --dx:-18px; --dy:-20px"><span class="planet-label">Writing</span></a>
+    <a class="planet" data-planet="contact" href="../contact.html" tabindex="-1" aria-hidden="true" style="--s:46px; --x:14vw; --y:-13vh;  --c:var(--indigo-lift); --d:.38s; --dur:13s; --dx:-20px; --dy:-16px"><span class="planet-label">Contact</span></a>
+    <span class="planet" style="--s:clamp(120px,17vw,220px); --x:-52vw; --y:48vh; --c:var(--indigo); --d:.20s; --dur:20s; --dx:26px; --dy:-18px"></span>
+    <span class="planet" style="--s:20px; --x:16vw;  --y:-33vh; --c:var(--paper); --d:.40s; --dur:11s; --dx:-14px; --dy:20px"></span>
+    <span class="planet" style="--s:12px; --x:44vw;  --y:-30vh; --c:var(--paper); --d:.44s; --dur:14s; --dx:16px;  --dy:16px"></span>
+    <span class="planet" style="--s:26px; --x:-31vw; --y:-36vh; --c:var(--amber); --d:.52s; --dur:18s; --dx:20px;  --dy:18px"></span>
+
+    <div class="universe-inner">
+      <div class="container">
+        <p class="eyebrow u-eyebrow">Navigate</p>
+        <ul class="u-list">
+          <li class="u-item" style="--i:0"><a class="u-link" href="../index.html" data-planet="home"><span class="link-text">Home</span></a></li>
+          <li class="u-item" style="--i:1"><a class="u-link" href="../about.html" data-planet="about"><span class="link-text">About</span></a></li>
+          <li class="u-item" style="--i:2"><a class="u-link" href="../work.html" data-planet="work"><span class="link-text">Work</span></a></li>
+          <li class="u-item" style="--i:3"><a class="u-link" href="../blog.html" data-planet="blog"><span class="link-text">Writing</span></a></li>
+          <li class="u-item" style="--i:4"><a class="u-link" href="../contact.html" data-planet="contact"><span class="link-text">Contact</span></a></li>
+        </ul>
+
+        <div class="u-meta">
+          <div>
+            <h4>Say hello</h4>
+            <a class="u-mail" href="mailto:joshserpis@gmail.com">joshserpis@gmail.com</a>
+          </div>
+          <div>
+            <h4>Based in</h4>
+            <p class="u-where">South West England — working with clients anywhere.</p>
+          </div>
+          <div>
+            <h4>Elsewhere</h4>
+            <div class="u-social">
+              <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="../images/twitter.png" alt=""></a>
+              <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="../images/github.png" alt=""></a>
+              <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="../images/codepen.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <header class="page-hero" data-lit>
+      <div class="orbit-field" aria-hidden="true">
+        <svg class="orbit-rings" viewBox="0 0 1000 700" focusable="false">
+          <ellipse cx="500" cy="350" rx="210" ry="140"/>
+          <ellipse cx="500" cy="350" rx="340" ry="226"/>
+          <ellipse cx="500" cy="350" rx="470" ry="312"/>
+        </svg>
+        <span class="orb orb--float" style="--s:clamp(90px,12vw,180px); --t:14%; --l:74%; --c:var(--amber); --depth:1; --d:.3s; --dur:12s; --dy:-20px;"></span>
+        <span class="orb" style="--s:clamp(46px,5vw,70px); --t:62%; --l:90%; --c:var(--indigo); --depth:1.8; --d:.44s;"></span>
+        <span class="orb" style="--s:16px; --t:30%; --l:62%; --c:var(--amethyst); --depth:3; --d:.62s;"></span>
+      </div>
+      <div class="container">
+        <div class="post-head">
+          <p class="eyebrow">AI engineering</p>
+          <h1><span class="rise-line"><span>Your agent doesn't need more tools.</span></span></h1>
+          <div class="post-byline">
+            <span><b>2 August 2026</b></span>
+            <i aria-hidden="true"></i>
+            <span>9 min read</span>
+            <i aria-hidden="true"></i>
+            <span>Josh Serpis</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="article-layout">
+
+        <aside class="article-aside reveal">
+          <div>
+            <h4>Contents</h4>
+            <ul class="toc">
+              <li><a href="#symptom">The symptom</a></li>
+              <li><a href="#scoreboard">What a scoreboard is</a></li>
+              <li><a href="#harness">What goes in it</a></li>
+              <li><a href="#cost">The cost of skipping it</a></li>
+              <li><a href="#monday">Where to start</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Filed under</h4>
+            <div class="chip-row">
+              <span class="chip">Evaluation</span>
+              <span class="chip">Agents</span>
+              <span class="chip amber">Process</span>
+            </div>
+          </div>
+        </aside>
+
+        <article class="prose reveal" data-article>
+
+          <p class="standfirst">Every stuck agent project I've been handed had the same shape. The demo was impressive, the backlog was full of new tools, and nobody could tell me whether last week's change had made things better or worse. That last part is the actual problem.</p>
+
+          <h2 id="symptom">The symptom: the demo works</h2>
+
+          <p>A demo is a single trace through a system with an enormous number of possible traces. It proves the thing can work once. Teams read it as proof the thing works, and then spend the next quarter widening the surface area — more tools, more retrieval, more prompt — because widening feels like progress and measuring doesn't.</p>
+
+          <p>The tell is always the same. Ask how the last change performed and you get a story rather than a number: someone tried a few prompts, it seemed better, they shipped it. That's not negligence, it's the absence of a cheap way to answer the question. When measurement is expensive, opinions fill the gap.</p>
+
+          <blockquote>
+            <p>If a change can't be shown to help, it can't be shown to hurt either. That cuts both ways, and the second half is what bites.</p>
+          </blockquote>
+
+          <h2 id="scoreboard">What a scoreboard is</h2>
+
+          <p>A scoreboard is a fixed set of cases you run on every change, producing the same numbers each time. That's it. It isn't a benchmark, it doesn't need a leaderboard, and it absolutely does not need to be statistically rigorous on day one. It needs to be <strong>consistent</strong> and <strong>cheap to run</strong>, because a scoreboard nobody runs is worth less than no scoreboard at all — it gives false comfort.</p>
+
+          <p>Thirty cases you actually run beats three hundred you run once. Start with the thirty. Pull them from real traffic if you have it, from the sales demo script if you don't, and from your own bug reports as they arrive: every production failure becomes a case, permanently. That last habit is what turns a scoreboard into an asset instead of a chore.</p>
+
+          <div class="note">
+            <h4>In practice</h4>
+            <p>The first version of mine is usually a folder of YAML files and a Python script that prints a table. No dashboard, no service, no database. If it takes longer than an afternoon to build, it's too clever.</p>
+          </div>
+
+          <h2 id="harness">What goes in it</h2>
+
+          <p>A case is an input, a way to judge the output, and enough metadata to slice results later. The judgement is the part people overthink. Use the cheapest check that would catch a real regression:</p>
+
+          <ul>
+            <li><strong>Deterministic assertions</strong> — did it call the right tool, in the right order, with a parseable argument? Most agent failures are structural, and structure is free to check.</li>
+            <li><strong>Reference matching</strong> — for anything with a correct answer, compare against it. Exact match where you can get away with it.</li>
+            <li><strong>Model-graded rubrics</strong> — only for the genuinely open-ended cases, and only with a rubric specific enough that two people would grade the same way.</li>
+          </ul>
+
+          <p>Written out, a case is unremarkable, which is the point:</p>
+
+<pre><code>- id: refund-outside-window
+  input: "I bought these boots in March, can I return them?"
+  expect_tools: [lookup_order, check_return_policy]
+  forbid_tools: [issue_refund]
+  rubric: >
+    Declines the refund, cites the 30-day window,
+    offers store credit. Does not invent a policy.
+  tags: [returns, policy, refusal]
+</code></pre>
+
+          <p><code>forbid_tools</code> earns its place immediately. Agents fail loudly by doing nothing and quietly by doing something they shouldn't, and the quiet failures are the expensive ones. Assert on what must not happen, not just what should.</p>
+
+          <p>The runner is equally dull. Load the cases, run them concurrently, write one row per case with the result, the trace and the git SHA:</p>
+
+<pre><code>results = await asyncio.gather(*[run_case(c) for c in cases])
+report = summarise(results, by=["tags", "judge_type"])
+report.to_csv(f"runs/{sha}.csv")
+print(report.compare_to(baseline))
+</code></pre>
+
+          <p>The comparison line is the whole product. Not the score — the delta against the last run, broken down by tag, so you can see that overall accuracy went up two points while refusals quietly collapsed. Aggregate numbers hide exactly the regressions you most need to catch.</p>
+
+          <h2 id="cost">The cost of skipping it</h2>
+
+          <p>You don't feel the absence early. You feel it at the point where the system is complex enough that changes have side effects, which is usually the same week you start talking about production. Three things happen at once:</p>
+
+          <ol>
+            <li><strong>Changes stop being reversible.</strong> Without a baseline, rolling back is a guess too. You end up carrying prompt changes nobody can justify because nobody can prove they're load-bearing.</li>
+            <li><strong>Nobody will sign off.</strong> Any serious stakeholder asks how you know it's ready. "It's been good in testing" is not an answer that survives a compliance review, and retrofitting evidence under deadline is miserable.</li>
+            <li><strong>Debugging becomes archaeology.</strong> With no stored traces, every investigation starts by trying to reproduce a failure someone described in Slack three days ago.</li>
+          </ol>
+
+          <p>The retrofit is always more expensive than building it first, and it lands at the worst moment: you're writing cases while shipping under pressure, and the cases you write are shaped by the bugs you're already chasing rather than the behaviour you actually want.</p>
+
+          <hr>
+
+          <h2 id="monday">Where to start</h2>
+
+          <p>If you're mid-project and none of this exists, don't stop feature work to build a platform. Do this instead, in order:</p>
+
+          <ul>
+            <li>Write twenty cases from real conversations. An afternoon.</li>
+            <li>Judge them on tool calls and structure only — no rubrics yet. Another afternoon.</li>
+            <li>Wire it into CI so it runs on every pull request and prints the delta.</li>
+            <li>Add one case every time something breaks in production. Forever.</li>
+          </ul>
+
+          <p>Two days of work, and every argument about whether a change helped becomes a table instead of a debate. The tools can wait. They'll be better tools once you can tell whether they helped.</p>
+
+        </article>
+      </div>
+    </div>
+
+    <section class="post-next">
+      <div class="container">
+        <a href="../blog.html">
+          <p class="eyebrow">Keep reading</p>
+          <h2>All posts <span class="arrow" aria-hidden="true">&rarr;</span></h2>
+        </a>
+      </div>
+    </section>
+
+    <section class="big-cta grain" data-lit>
+      <span class="cta-orb cta-orb--b" aria-hidden="true"></span>
+      <span class="cta-orb cta-orb--a" aria-hidden="true"></span>
+      <div class="container">
+        <p class="eyebrow">Got a project in mind?</p>
+        <h2>
+          <span class="rise-line"><span>Let's build</span></span>
+          <span class="rise-line"><span style="--d:.1s">something together.</span></span>
+        </h2>
+        <p>I take on freelance AI and full-stack work alongside my day job, and I'm open to founding opportunities. Tell me what you're building and I'll come back to you within a day.</p>
+        <a class="btn btn-light" href="../contact.html">Start a conversation <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../work.html">Work</a></li>
+        <li><a href="../blog.html">Writing</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="../images/twitter.png" alt=""></a>
+        <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="../images/github.png" alt=""></a>
+        <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="../images/codepen.png" alt=""></a>
+      </div>
+      <p class="footer-meta">&copy; <span data-year>2026</span> Josh Serpis &middot; Serpex Studios &middot; Built by hand, no frameworks</p>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/blog.js"></script>
+</body>
+</html>

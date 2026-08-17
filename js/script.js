@@ -426,7 +426,12 @@
      ---------------------------------------------------------------------- */
   var intro = document.querySelector(".intro");
   if (intro && document.documentElement.classList.contains("intro-armed")) {
-    var RUN = 4600;                 /* must match the CSS animation length */
+    /* The CSS scales every intro duration by --intro-speed; read it here so
+       RUN and the animation can't fall out of step. */
+    var introSpeed = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--intro-speed")
+    ) || 1;
+    var RUN = Math.round(4600 * introSpeed);   /* must match the CSS animation length */
     var introTimer = null;
     var introDone = false;
 
@@ -447,7 +452,7 @@
       if (mainEl && mainEl.getAnimations) {
         mainEl.getAnimations().forEach(function (a) { a.cancel(); a.play(); });
       }
-      setTimeout(function () { intro.classList.add("is-gone"); }, 950);
+      setTimeout(function () { intro.classList.add("is-gone"); }, Math.round(950 * introSpeed));
     }
 
     function onIntroKey(e) {
