@@ -340,9 +340,37 @@
      8. The warp — page-to-page transition
      ---------------------------------------------------------------------- */
   var warp = document.querySelector(".warp-out");
+  var WARP_KEY = "jsx-warp";
 
   function sameOrigin(link) {
     return link.hostname === window.location.hostname && link.protocol.indexOf("http") === 0;
+  }
+
+  /* The colour the warp should take for a given link:
+       1. an explicit data-warp on the link or a wrapper,
+       2. a planet's own --c when the planet itself was clicked,
+       3. the planet that leads to the same place — so the menu item, the
+          nav link and the planet all warp the same colour.
+     Nothing matched leaves it to the CSS default (indigo). */
+  function planetColour(pl) {
+    return getComputedStyle(pl).getPropertyValue("--c").trim();
+  }
+
+  function warpColour(link) {
+    var flagged = link.closest("[data-warp]");
+    if (flagged) return flagged.getAttribute("data-warp").trim();
+    if (link.classList.contains("planet")) return planetColour(link);
+
+    var key = link.getAttribute("data-planet");
+    var twin = key ? document.querySelector(".planet[data-planet='" + key + "']") : null;
+
+    if (!twin) {
+      var orbit = document.querySelectorAll("a.planet[href]");
+      for (var i = 0; i < orbit.length && !twin; i++) {
+        if (orbit[i].pathname === link.pathname) twin = orbit[i];
+      }
+    }
+    return twin ? planetColour(twin) : "";
   }
 
   if (warp && !reduced) {
@@ -358,8 +386,15 @@
       if (link.href.split("#")[0] === window.location.href.split("#")[0]) return;
 
       e.preventDefault();
+      var colour = warpColour(link);
       warp.style.setProperty("--wx", e.clientX + "px");
       warp.style.setProperty("--wy", e.clientY + "px");
+      /* Hand the colour to the page being loaded so its warp-in matches */
+      try {
+        if (colour) sessionStorage.setItem(WARP_KEY, colour);
+        else sessionStorage.removeItem(WARP_KEY);
+      } catch (err) { /* storage blocked — the exit still colours itself */ }
+      if (colour) warp.style.setProperty("--warp-c", colour);
       warp.classList.add("is-active");
       setTimeout(function () { window.location.href = link.href; }, 560);
     });
