@@ -1,0 +1,22 @@
+{
+	// Static site: no Worker script, just the files build.mjs stages in dist/.
+	//
+	// This file also exists to STOP `wrangler deploy` from auto-configuring
+	// itself. With no config present it sniffs package.json and turns whatever
+	// build tool it finds there into an inferred build command — which is how a
+	// long-dead `gulp` devDependency became `npx gulp build` and broke deploys.
+	//
+	// `name` must match the Worker this repo deploys to. If the Cloudflare
+	// project is named something else, change it here or the next deploy
+	// creates a second Worker instead of updating the existing one.
+	"name": "personal-portfolio",
+	"compatibility_date": "2026-05-01",
+	"build": {
+		"command": "node build.mjs"
+	},
+	"assets": {
+		"directory": "./dist",
+		// Serves /about from about.html and redirects /about.html -> /about.
+		"html_handling": "auto-trailing-slash"
+	}
+}

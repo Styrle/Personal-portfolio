@@ -6,9 +6,8 @@
   <meta name="description" content="Josh Serpis — AI and full-stack engineer. Agent systems, evaluation pipelines and the products built around them.">
   <meta name="theme-color" content="#101415">
   <title>Josh Serpis — AI &amp; Full-Stack Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hanken+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/bricolage-grotesque-200-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/hanken-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/stylesheet.css">
   <script>
     /* Arm the intro before first paint. No JS, reduced motion, or a repeat
@@ -23,8 +22,25 @@
       } catch (e) { /* storage blocked — just skip the intro */ }
     })();
   </script>
+  <script>
+    /* Pick up the warp colour the previous page left behind, before first
+       paint, so the transition keeps one colour across the navigation. */
+    (function () {
+      try {
+        var c = sessionStorage.getItem("jsx-warp");
+        sessionStorage.removeItem("jsx-warp");
+        if (c && /^[#\w(),.%\s-]{1,40}$/.test(c)) {
+          document.documentElement.style.setProperty("--warp-in-c", c);
+        }
+      } catch (e) { /* storage blocked — the default colour stands */ }
+    })();
+  </script>
 </head>
 <body>
+
+  <!-- page transition surfaces -->
+  <div class="warp-in" aria-hidden="true"></div>
+  <div class="warp-out" aria-hidden="true"></div>
 
   <!-- ============================ INTRO ============================ -->
   <div class="intro">
@@ -115,9 +131,9 @@
           <div>
             <h4>Elsewhere</h4>
             <div class="u-social">
-              <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
-              <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
-              <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
+              <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img width="64" height="64" src="images/twitter.webp" alt="" loading="lazy" decoding="async"></a>
+              <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img width="64" height="64" src="images/github.webp" alt="" loading="lazy" decoding="async"></a>
+              <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img width="64" height="64" src="images/codepen.webp" alt="" loading="lazy" decoding="async"></a>
             </div>
           </div>
         </div>
@@ -229,11 +245,11 @@
     </section>
 
     <div class="work-preview" aria-hidden="true">
-      <img data-key="preactiv" src="images/preactiv-img-1.png" alt="" loading="lazy">
-      <img data-key="valhq" src="images/val-img-1.png" alt="" loading="lazy">
-      <img data-key="bristol" src="images/bristol-kitchen-1.png" alt="" loading="lazy">
-      <img data-key="lm" src="images/lm-img-2.png" alt="" loading="lazy">
-      <img data-key="fibre" src="images/fibre-img-2.png" alt="" loading="lazy">
+      <img width="1200" height="5481" data-key="preactiv" src="images/preactiv-img-1.webp" alt="" loading="lazy" decoding="async">
+      <img width="1373" height="912" data-key="valhq" src="images/val-img-1.webp" alt="" loading="lazy" decoding="async">
+      <img width="1600" height="559" data-key="bristol" src="images/bristol-kitchen-1.webp" alt="" loading="lazy" decoding="async">
+      <img width="2000" height="921" data-key="lm" src="images/lm-img-2.png" alt="" loading="lazy" decoding="async">
+      <img width="1600" height="775" data-key="fibre" src="images/fibre-img-2.webp" alt="" loading="lazy" decoding="async">
     </div>
 
     <!-- 04 ========================= CONSTELLATION ======================== -->
@@ -266,19 +282,19 @@
 
         <div class="cap-grid">
           <article class="cap-card reveal">
-            <span class="cap-mark"><img src="images/coding.svg" alt="" aria-hidden="true"></span>
+            <span class="cap-mark"><img width="263" height="263" src="images/coding.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
             <h3>AI engineering</h3>
             <p>Agent systems and the evaluation harnesses that tell you when a change made things worse. Built on Azure AI, shipped with tests rather than vibes.</p>
             <p class="cap-stack">Agent Framework · Python · Azure AI</p>
           </article>
           <article class="cap-card reveal" style="--d:.1s">
-            <span class="cap-mark"><img src="images/coding.svg" alt="" aria-hidden="true"></span>
+            <span class="cap-mark"><img width="263" height="263" src="images/coding.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
             <h3>Full-stack product</h3>
             <p>Typed APIs in .NET and Python behind Next.js and React front ends — the layer that turns a working model into something a team will actually use.</p>
             <p class="cap-stack">.NET · Next.js · TypeScript · Node</p>
           </article>
           <article class="cap-card reveal" style="--d:.2s">
-            <span class="cap-mark"><img src="images/ux.svg" alt="" aria-hidden="true"></span>
+            <span class="cap-mark"><img width="400" height="400" src="images/ux.svg" alt="" aria-hidden="true" loading="lazy" decoding="async"></span>
             <h3>Platform &amp; developer experience</h3>
             <p>Azure ML and DevOps pipelines, plus the internal scaffolding — documentation, shared commands, Claude Code workflows — that makes a team faster than the sum of its people.</p>
             <p class="cap-stack">Azure DevOps · Azure ML · Claude Code</p>
@@ -292,19 +308,19 @@
       <p class="marquee-label">Clients &amp; collaborators</p>
       <div class="marquee">
         <div class="marquee-track">
-          <img src="images/lm-logo.png" alt="LM Expert Tuition">
-          <img src="images/bee-logo.png" alt="Somerset Bees">
-          <img src="images/one-logo.png" alt="One Guys">
-          <img src="images/fibre-logo.svg" alt="Fibre Gaming">
-          <img src="images/preactiv-logo.png" alt="Preactiv">
-          <img src="images/val-logo.png" alt="ValHQ">
+          <img width="256" height="256" src="images/lm-logo.webp" alt="LM Expert Tuition" loading="lazy" decoding="async">
+          <img width="256" height="256" src="images/bee-logo.webp" alt="Somerset Bees" loading="lazy" decoding="async">
+          <img width="256" height="256" src="images/one-logo.webp" alt="One Guys" loading="lazy" decoding="async">
+          <img width="455" height="604" src="images/fibre-logo.svg" alt="Fibre Gaming" loading="lazy" decoding="async">
+          <img width="203" height="210" src="images/preactiv-logo.png" alt="Preactiv" loading="lazy" decoding="async">
+          <img width="256" height="145" src="images/val-logo.webp" alt="ValHQ" loading="lazy" decoding="async">
           <!-- duplicated for a seamless loop -->
-          <img src="images/lm-logo.png" alt="" aria-hidden="true">
-          <img src="images/bee-logo.png" alt="" aria-hidden="true">
-          <img src="images/one-logo.png" alt="" aria-hidden="true">
-          <img src="images/fibre-logo.svg" alt="" aria-hidden="true">
-          <img src="images/preactiv-logo.png" alt="" aria-hidden="true">
-          <img src="images/val-logo.png" alt="" aria-hidden="true">
+          <img width="256" height="256" src="images/lm-logo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img width="256" height="256" src="images/bee-logo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img width="256" height="256" src="images/one-logo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img width="455" height="604" src="images/fibre-logo.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img width="203" height="210" src="images/preactiv-logo.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+          <img width="256" height="145" src="images/val-logo.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -335,14 +351,14 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="footer-social">
-        <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img src="images/twitter.png" alt=""></a>
-        <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img src="images/github.png" alt=""></a>
-        <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img src="images/codepen.png" alt=""></a>
+        <a href="https://twitter.com/Joshua_serpis" target="_blank" rel="noreferrer noopener" aria-label="Twitter"><img width="64" height="64" src="images/twitter.webp" alt="" loading="lazy" decoding="async"></a>
+        <a href="https://github.com/Styrle" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><img width="64" height="64" src="images/github.webp" alt="" loading="lazy" decoding="async"></a>
+        <a href="https://codepen.io/joshuaserpis" target="_blank" rel="noreferrer noopener" aria-label="CodePen"><img width="64" height="64" src="images/codepen.webp" alt="" loading="lazy" decoding="async"></a>
       </div>
       <p class="footer-meta">&copy; <span data-year>2026</span> Josh Serpis &middot; Serpex Studios &middot; Built by hand, no frameworks</p>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js" defer></script>
 </body>
 </html>
