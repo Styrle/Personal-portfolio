@@ -357,3 +357,6 @@ MigrationBackup/
 # Lighthouse run artefacts - regenerable output, one JSON per measurement
 # pass. Noisy in diffs and of no use to anyone cloning the repo.
 perf/reports/
+
+# Cloudflare deploy output (built by build.mjs)
+dist/
